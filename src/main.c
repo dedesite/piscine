@@ -1,0 +1,235 @@
+#include <string.h>
+
+void test(result)
+{
+	if(result)
+		my_putchar('Y');
+	else
+		my_putchar('N');
+	my_putchar('\n');
+}
+
+void test_str(char* s1, char* s2)
+{
+	test(my_strcmp(s1, s2) == 0);
+}
+
+void test_my_put_nbr()
+{
+	/*my_put_nbr(42);
+	my_putchar('\n');
+	my_put_nbr(-42);
+	my_putchar('\n');
+	my_put_nbr(0);
+	my_putchar('\n');
+	my_put_nbr(2147483647);
+	my_putchar('\n');
+	my_put_nbr(-2147483648);
+	my_putchar('\n');*/	
+}
+
+void test_my_aff_comb()
+{
+	//my_aff_comb();
+}
+
+void test_my_aff_combn()
+{
+	/*test(add_one_at_pos(2567, 2) == 2600);
+	test(add_one_at_pos(2567, 0) == 2568);
+	test(add_one_at_pos(2567, 1) == 2570);
+	test(add_one_at_pos(2567, 3) == 3000);
+	test(add_one_at_pos(7, 0) == 8);
+	test(add_one_at_pos(77, 0) == 78);
+	test(add_one_at_pos(0, 3) == 1000);
+
+	test(get_at_pos(2547, 2) == 5);
+	test(get_at_pos(3, 2) == 0);
+
+	my_aff_combn(2);*/
+}
+
+void test_my_putstr()
+{
+	/*char str[10];
+	
+	str[0] = 'a';
+	str[1] = 'l';
+	str[2] = 'l';
+	str[3] = 'o';
+	str[4] = '\0';
+	my_putstr(str);
+	my_putchar('\n');
+	my_putstr("yop");
+	my_putchar('\n');*/
+}
+
+void test_mystrlen()
+{
+	/*
+	char str[10];
+	
+	str[0] = 'a';
+	str[1] = 'l';
+	str[2] = 'l';
+	str[3] = 'o';
+	str[4] = '\0';
+	test(my_strlen(str) == 4);
+	test(my_strlen("yop") == 3);
+	*/
+}
+
+char* my_evil_str(char*);
+void test_my_evil_str()
+{
+	/*
+	char* str1 = strdup("abcdef");
+	char* str2 = strdup("abcdefg");
+	char* str3 = strdup("kayak");
+	
+	test(strcmp("fedcba", my_evil_str(str1)) == 0);
+	test(strcmp("gfedcba", my_evil_str(str2)) == 0);
+	test(strcmp("kayak", my_evil_str(str3)) == 0);
+	*/
+}
+
+void test_getnbr()
+{
+	/*test(my_getnbr("+---+--++---+---+---+-42") == -42);
+	test(my_getnbr("+---+--++---+---+---+42") == 42);
+	test(my_getnbr("42a43") == 42);
+	test(my_getnbr("11000000000000000000000042") == 0);
+	test(my_getnbr("-11000000000000000000000042") == 0);
+	test(my_getnbr("-2147483648") == -2147483648);
+	test(my_getnbr("2147483647") == 2147483647);
+	test(my_getnbr("2147483648") == 0);*/
+}
+
+void test_my_sort_int_tab()
+{
+	/*int tab[5] = {5, 8, 1, 7, 9};
+	my_sort_int_tab(tab, 5);
+	test(tab[0] == 1 && tab[1] == 5 && tab[2] == 7 && tab[3] == 8 && tab[4] == 9);*/
+}
+/*
+void test_my_factorielle_it()
+{
+	test(my_factorielle_it(0) == 1);
+	test(my_factorielle_it(-1) == 0);
+	test(my_factorielle_it(3) == 6);
+	test(my_factorielle_it(12) == 479001600);
+	test(my_factorielle_it(13) == 0);
+}
+
+void test_my_factorielle_rec()
+{
+	test(my_factorielle_rec(0) == 1);
+	test(my_factorielle_rec(-1) == 0);
+	test(my_factorielle_rec(3) == 6);
+	test(my_factorielle_rec(12) == 479001600);
+	test(my_factorielle_rec(13) == 0);
+}
+*/
+void test_my_power_it()
+{
+	/*
+	test(my_power_it(1, 2) == 1);
+	test(my_power_it(2, 2) == 4);
+	*/
+}
+char *my_strcpy(char *dest, char *src);
+char *my_strncpy(char *dest, char *src, int n);
+char* my_revstr(char*);
+/*void test_strcpy()
+{
+	char str[5];
+	test(strcmp(my_strcpy(str, "test"), "test") == 0);
+}
+
+void test_strncpy()
+{
+	char str[5];
+	test(strcmp(strncpy(str, "test", 2), "te") == 0);
+	test(strcmp(my_strncpy(str, "test", 2), "te") == 0);
+	
+	test(strcmp(my_strncpy(str, "test", 7), "test") == 0);
+	//my_putstr(str);
+}
+
+void test_revstr()
+{
+	char str[6] = "testa";
+	test(strcmp(my_revstr(str), "atset") == 0);
+}
+
+char *my_strstr(char *str, char *to_find);
+void test_strstr()
+{
+	test(strcmp(my_strstr("coucou les lapinous", "les"), "les lapinous") == 0);
+	test(my_strstr("test ou les lapins", "rac") == NULL);
+	test(strcmp(my_strstr("les bananes c'est bon", "bo"), "bon") == 0);
+}*/
+/*
+void test_strcmp()
+{
+	char str[3] = "ab";
+	test(strcmp("ab", "aa") == 1);
+	test(strcmp("ac", "aa") == 1);
+	test(strcmp("aa", "ab") == -1);
+	test(strcmp("aa", "a") == 1);
+	test(strcmp("aa", "abcdef") == -1);
+	test(strcmp("ab", "ab") == 0);
+	test(strcmp("ab", str) == 0);
+	test(my_strncmp("abcd", "ab", 2) == 0);
+	test(my_strncmp("aacd", "ab", 2) == -1);
+	test(my_strncmp("abcd", "ab", 8) == 1);
+}
+*/
+char *my_strupcase(char *str);
+char *my_strlowcase(char *str);
+/*void test_strupcase()
+{
+	test(strcmp(my_strupcase(strdup("salUt cA va ?")), "SALUT CA VA ?") == 0);
+}*/
+
+/*void test_strlowcase()
+{
+	test(strcmp(my_strlowcase(strdup("salUt cA va ?")), "salut ca va ?") == 0);
+}*/
+
+char *my_strcapitalize(char *str);
+void test_strcapitalize()
+{
+	char* str;
+	str = strdup("salut, comMent ca va ? 42mots quaRante-deUx; cinQuante+et+un");
+	str = my_strcapitalize(str);
+	test_str(str, "Salut, Comment Ca Va ? 42mots Quarante-Deux; Cinquante+Et+Un");
+}
+
+void test_utils()
+{
+	test(is_lower('b') == 1);
+	test(is_lower('B') == 0);
+	test(is_upper('B') == 1);
+	test(is_upper('b') == 0);
+	test(is_letter('B') == 1);
+	test(is_letter('b') == 1);
+	test(is_letter('[') == 0);
+	test(is_letter('@') == 0);
+	test(is_letter('{') == 0);
+	test(is_letter(' ') == 0);
+	test(is_letter('2') == 0);
+	test(is_lower('2') == 0);
+	test(is_upper('2') == 0);
+	test(is_printable('2') == 1);
+	test(is_printable('\n') == 0);
+	test(is_alphanum('9') == 1);
+	test(is_alphanum('{') == 0);
+}
+int main()
+{
+	//test_strcmp();
+	test_utils();
+	//test_strcapitalize();
+	return (0);
+}
