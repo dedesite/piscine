@@ -212,13 +212,13 @@ void test_utils()
 	test(is_lower('B') == 0);
 	test(is_upper('B') == 1);
 	test(is_upper('b') == 0);
-	test(is_letter('B') == 1);
-	test(is_letter('b') == 1);
-	test(is_letter('[') == 0);
-	test(is_letter('@') == 0);
-	test(is_letter('{') == 0);
-	test(is_letter(' ') == 0);
-	test(is_letter('2') == 0);
+	test(is_alpha('B') == 1);
+	test(is_alpha('b') == 1);
+	test(is_alpha('[') == 0);
+	test(is_alpha('@') == 0);
+	test(is_alpha('{') == 0);
+	test(is_alpha(' ') == 0);
+	test(is_alpha('2') == 0);
 	test(is_lower('2') == 0);
 	test(is_upper('2') == 0);
 	test(is_printable('2') == 1);
@@ -226,10 +226,28 @@ void test_utils()
 	test(is_alphanum('9') == 1);
 	test(is_alphanum('{') == 0);
 }
+
+void test_str_is()
+{
+	test(my_str_isalpha("aioulkjJHGgjhk") == 1);
+	test(my_str_isalpha("aioulkj32") == 0);
+	test(my_str_isprintable("aioulkj32") == 1);
+	test(my_str_isprintable("a\nioulkj32") == 0);
+}
+
+void test_putnbr_base()
+{
+	putline("Devrait afficher : 101010");
+	my_putnbr_base(42, "01");
+	putline("Devrait afficher : BABABA");
+	my_putnbr_base(42, "AB");
+	putline("Devrait afficher : 2A");
+	my_putnbr_base(42, "0123456789ABCDEF");
+}
+
 int main()
 {
-	//test_strcmp();
-	test_utils();
+	test_putnbr_base();
 	//test_strcapitalize();
 	return (0);
 }
