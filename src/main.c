@@ -16,7 +16,9 @@ void test_str(char* s1, char* s2)
 
 void test_my_put_nbr()
 {
-	/*my_put_nbr(42);
+	my_put_nbr(-10);
+	my_putchar('\n');
+	my_put_nbr(42);
 	my_putchar('\n');
 	my_put_nbr(-42);
 	my_putchar('\n');
@@ -25,7 +27,7 @@ void test_my_put_nbr()
 	my_put_nbr(2147483647);
 	my_putchar('\n');
 	my_put_nbr(-2147483648);
-	my_putchar('\n');*/	
+	my_putchar('\n');	
 }
 
 void test_my_aff_comb()
@@ -217,6 +219,7 @@ void test_utils()
 	test(is_alpha('b') == 1);
 	test(is_alpha('[') == 0);
 	test(is_alpha('@') == 0);
+
 	test(is_alpha('{') == 0);
 	test(is_alpha(' ') == 0);
 	test(is_alpha('2') == 0);
@@ -238,17 +241,22 @@ void test_str_is()
 */
 void test_putnbr_base()
 {
-	putline("Devrait afficher : 101010");
+	putlineb("Devrait afficher : 101010 ");
 	my_putnbr_base(42, "01");
-	putline("Devrait afficher : BABABA");
+	putlineb("Devrait afficher : BABABA ");
 	my_putnbr_base(42, "AB");
-	putline("Devrait afficher : 2A");
+	putlineb("Devrait afficher : 2A ");
 	my_putnbr_base(42, "0123456789ABCDEF");
+	putlineb("Devrait afficher : -C ");
+	my_putnbr_base(-12, "0123456789ABCDEF");
+	putlineb("Devrait afficher : -4C8 ");
+	my_putnbr_base(-1224, "0123456789ABCDEF");
 }
 
 int main()
 {
-	test_putnbr_base();
+	test_my_put_nbr();
+	//test_putnbr_base();
 	//test_strcapitalize();
 	return (0);
 }

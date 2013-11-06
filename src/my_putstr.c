@@ -8,3 +8,9 @@ void putline(char* str)
 	my_putstr(str);
 	my_putchar('\n');
 }
+
+void putlineb(char* str)
+{
+	my_putchar('\n');
+	my_putstr(str);
+}
