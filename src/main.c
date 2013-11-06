@@ -14,6 +14,7 @@ void test_str(char* s1, char* s2)
 	test(my_strcmp(s1, s2) == 0);
 }
 
+/*
 void test_my_put_nbr()
 {
 	my_put_nbr(-10);
@@ -29,6 +30,7 @@ void test_my_put_nbr()
 	my_put_nbr(-2147483648);
 	my_putchar('\n');	
 }
+*/
 
 void test_my_aff_comb()
 {
@@ -97,14 +99,14 @@ void test_my_evil_str()
 
 void test_getnbr()
 {
-	/*test(my_getnbr("+---+--++---+---+---+-42") == -42);
+	test(my_getnbr("+---+--++---+---+---+-42") == -42);
 	test(my_getnbr("+---+--++---+---+---+42") == 42);
 	test(my_getnbr("42a43") == 42);
 	test(my_getnbr("11000000000000000000000042") == 0);
 	test(my_getnbr("-11000000000000000000000042") == 0);
 	test(my_getnbr("-2147483648") == -2147483648);
 	test(my_getnbr("2147483647") == 2147483647);
-	test(my_getnbr("2147483648") == 0);*/
+	test(my_getnbr("2147483648") == 0);
 }
 
 void test_my_sort_int_tab()
@@ -239,6 +241,7 @@ void test_str_is()
 	test(my_str_isprintable("a\nioulkj32") == 0);
 }
 */
+/*
 void test_putnbr_base()
 {
 	putlineb("Devrait afficher : 101010 ");
@@ -252,10 +255,21 @@ void test_putnbr_base()
 	putlineb("Devrait afficher : -4C8 ");
 	my_putnbr_base(-1224, "0123456789ABCDEF");
 }
+*/
+
+void test_getnbr_base()
+{
+	test(my_getnbr_base("-42", "0123456789") == -42);
+	test(my_getnbr_base("-101010", "01") == -42);
+	test(my_getnbr_base("-BABABA", "AB") == -42);
+	test(my_getnbr_base("-4C8", "0123456789ABCDEF") == -1224);
+	test(my_getnbr_base("--4C8abc", "0123456789ABCDEF") == 1224);
+}
 
 int main()
 {
-	test_my_put_nbr();
+	test_getnbr();
+	//test_getnbr_base();
 	//test_putnbr_base();
 	//test_strcapitalize();
 	return (0);
