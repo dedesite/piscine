@@ -97,7 +97,7 @@ void test_my_evil_str()
 	*/
 }
 
-void test_getnbr()
+/*void test_getnbr()
 {
 	test(my_getnbr("+---+--++---+---+---+-42") == -42);
 	test(my_getnbr("+---+--++---+---+---+42") == 42);
@@ -107,7 +107,7 @@ void test_getnbr()
 	test(my_getnbr("-2147483648") == -2147483648);
 	test(my_getnbr("2147483647") == 2147483647);
 	test(my_getnbr("2147483648") == 0);
-}
+}*/
 
 void test_my_sort_int_tab()
 {
@@ -266,11 +266,13 @@ void test_getnbr_base()
 	test(my_getnbr_base("--4C8abc", "0123456789ABCDEF") == 1224);
 }
 
+void test_showstr()
+{
+	putlineb("Devrait afficher : coucou \\0a\\07\\0d ca va ? ");
+	my_showstr("coucou \n\a\r ca va ?");
+}
 int main()
 {
-	test_getnbr();
-	//test_getnbr_base();
-	//test_putnbr_base();
-	//test_strcapitalize();
+	test_showstr();
 	return (0);
 }
