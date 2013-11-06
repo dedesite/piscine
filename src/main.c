@@ -198,6 +198,7 @@ char *my_strlowcase(char *str);
 }*/
 
 char *my_strcapitalize(char *str);
+/*
 void test_strcapitalize()
 {
 	char* str;
@@ -234,7 +235,7 @@ void test_str_is()
 	test(my_str_isprintable("aioulkj32") == 1);
 	test(my_str_isprintable("a\nioulkj32") == 0);
 }
-
+*/
 void test_putnbr_base()
 {
 	putline("Devrait afficher : 101010");
