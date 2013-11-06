@@ -256,7 +256,7 @@ void test_putnbr_base()
 	my_putnbr_base(-1224, "0123456789ABCDEF");
 }
 */
-
+/*
 void test_getnbr_base()
 {
 	test(my_getnbr_base("-42", "0123456789") == -42);
@@ -271,8 +271,14 @@ void test_showstr()
 	putlineb("Devrait afficher : coucou \\0a\\07\\0d ca va ? ");
 	my_showstr("coucou \n\a\r ca va ?");
 }
+*/
+
+void test_showmem()
+{
+	my_showmem("Salut les aminches c'est cool show mem on fait de truc terrible", 5);
+}
 int main()
 {
-	test_showstr();
+	test_showmem();
 	return (0);
 }
