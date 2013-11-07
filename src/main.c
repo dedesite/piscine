@@ -328,6 +328,7 @@ void test_square_root()
 	test(my_square_root(82) == 0);
 }
 */
+/*
 void test_is_prime()
 {
 	test(my_is_prime(1) == 0);
@@ -346,9 +347,14 @@ void test_find_prime_sup()
 	test(my_find_prime_sup(4) == 5);
 	test(my_find_prime_sup(9) == 11);
 }
+*/
+void test_8r1()
+{
+	my_put_nbr(my_8r1());
+}
 
 int main()
 {
-	test_find_prime_sup();
+	test_8r1();
 	return (0);
 }
