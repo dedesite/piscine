@@ -4,11 +4,11 @@ int my_power_it(int nb, int power)
 
 	if(power == 0)
 	{
-		return 1;
+		return (1);
 	}
 	else if(power < 0)
 	{
-		return 0;
+		return (0);
 	}
 	result = nb;
 	while(power > 1)
