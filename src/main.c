@@ -47,9 +47,6 @@ void test_my_aff_combn()
 	test(add_one_at_pos(77, 0) == 78);
 	test(add_one_at_pos(0, 3) == 1000);
 
-	test(get_at_pos(2547, 2) == 5);
-	test(get_at_pos(3, 2) == 0);
-
 	my_aff_combn(2);*/
 }
 
@@ -133,14 +130,32 @@ void test_my_factorielle_rec()
 	test(my_factorielle_rec(12) == 479001600);
 	test(my_factorielle_rec(13) == 0);
 }
-*/
+
 void test_my_power_it()
 {
-	/*
 	test(my_power_it(1, 2) == 1);
+	test(my_power_it(2, 0) == 1);
+	test(my_power_it(2, 1) == 2);
+	test(my_power_it(3, 3) == 27);
 	test(my_power_it(2, 2) == 4);
-	*/
+	test(my_power_it(2, -2) == 0);
+	test(my_power_it(9, 10) == 0);
+	test(my_power_it(-9, 2) == 81);
 }
+*/
+/*
+void test_my_power_rec()
+{
+	test(my_power_rec(1, 2) == 1);
+	test(my_power_rec(2, 0) == 1);
+	test(my_power_rec(2, 1) == 2);
+	test(my_power_rec(3, 3) == 27);
+	test(my_power_rec(2, 2) == 4);
+	test(my_power_rec(2, -2) == 0);
+	test(my_power_rec(9, 10) == 0);
+	test(my_power_rec(-9, 2) == 81);
+}
+*/
 char *my_strcpy(char *dest, char *src);
 char *my_strncpy(char *dest, char *src, int n);
 char* my_revstr(char*);
@@ -273,12 +288,73 @@ void test_showstr()
 }
 */
 
-void test_showmem()
+/*void test_showmem()
 {
 	my_showmem("Salut les aminches c'est cool show mem on fait de truc terrible", 5);
+}*/
+/*
+void test_mathutils()
+{
+	test(get_nb_at_pos(2547, 2) == 5);
+	test(get_nb_at_pos(3, 2) == 0);
+	test(get_nb_at_pos(3, -2) == 0);
+
+	test(get_nb_len(0) == 1);
+	test(get_nb_len(2) == 1);
+	test(get_nb_len(-520) == 3);
+	test(get_nb_len(520) == 3);
+	test(get_nb_len(52123) == 5);
 }
+*/
+/*
+void test_square_root()
+{
+	test(get_group_num(529, 0) == 29);
+	test(get_group_num(529, 1) == 5);
+	test(get_group_num(529, 2) == 0);
+	test(get_group_num(529, -2) == 0);
+	int rest = 0;
+	int to_sub = 1;
+	test(treat_group(5, &rest, &to_sub) == 2);
+	test(rest == 1);
+	my_put_nbr(to_sub);
+	test(to_sub == 3);
+	to_sub = 41;
+	test(treat_group(29, &rest, &to_sub) == 3);
+	test(rest == 0);
+	test(get_to_sub(3) == 41);
+	test(my_square_root(81) == 9);
+	test(my_square_root(529) == 23);
+	test(my_square_root(82) == 0);
+}
+*/
+/*
+void test_is_prime()
+{
+	test(my_is_prime(1) == 0);
+	test(my_is_prime(2) == 1);
+	test(my_is_prime(3) == 1);
+	test(my_is_prime(5) == 1);
+	test(my_is_prime(6) == 0);
+	test(my_is_prime(7) == 1);
+	test(my_is_prime(9) == 0);
+}
+
+void test_find_prime_sup()
+{
+	test(my_find_prime_sup(2) == 2);
+	test(my_find_prime_sup(3) == 3);
+	test(my_find_prime_sup(4) == 5);
+	test(my_find_prime_sup(9) == 11);
+}
+*/
+void test_8r1()
+{
+	my_put_nbr(my_8r1());
+}
+
 int main()
 {
-	test_showmem();
+	test_8r1();
 	return (0);
 }

@@ -25,18 +25,6 @@ int add_one_at_pos(nb, pos)
 	return (nb);
 }
 
-int get_at_pos(nb, pos)
-{
-	int i;
-
-	i = 0;
-	while(i < pos)
-	{
-		nb = nb / 10;
-		i = i + 1;
-	}
-	return nb % 10;
-}
 
 void my_aff_combn(int n)
 {
@@ -54,7 +42,7 @@ void my_aff_combn(int n)
 	{
 		while(i < n)
 		{
-			c = c + get_at_pos(to_add, (n - 1) - i);
+			c = c + get_nb_at_pos(to_add, (n - 1) - i);
 			my_putchar(c);
 			if(c >= '9')
 			{
