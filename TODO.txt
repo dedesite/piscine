@@ -3,5 +3,7 @@
 -gérer proprement l'overflow sur les factorielles
 -revoir le fonctionnement de strncpy => pourquoi ça marche pas comme je pense ??
 -Faire les power
--Faire les 8 reines
+-Faire les 8 reines 1 et 2
+-Faire my_square_root
+-Faire my_is_prime et my_find_prime_sup
 -Refaire my_strcmp et my_strncmp pour qu'ils correspondent au vrai fonctionnement de strcmp
