@@ -133,7 +133,7 @@ void test_my_factorielle_rec()
 	test(my_factorielle_rec(12) == 479001600);
 	test(my_factorielle_rec(13) == 0);
 }
-*/
+
 void test_my_power_it()
 {
 	test(my_power_it(1, 2) == 1);
@@ -144,6 +144,18 @@ void test_my_power_it()
 	test(my_power_it(2, -2) == 0);
 	test(my_power_it(9, 10) == 0);
 	test(my_power_it(-9, 2) == 81);
+}
+*/
+void test_my_power_rec()
+{
+	test(my_power_rec(1, 2) == 1);
+	test(my_power_rec(2, 0) == 1);
+	test(my_power_rec(2, 1) == 2);
+	test(my_power_rec(3, 3) == 27);
+	test(my_power_rec(2, 2) == 4);
+	test(my_power_rec(2, -2) == 0);
+	test(my_power_rec(9, 10) == 0);
+	test(my_power_rec(-9, 2) == 81);
 }
 char *my_strcpy(char *dest, char *src);
 char *my_strncpy(char *dest, char *src, int n);
@@ -283,6 +295,6 @@ void test_showstr()
 }*/
 int main()
 {
-	test_my_power_it();
+	test_my_power_rec();
 	return (0);
 }
