@@ -306,14 +306,14 @@ void test_mathutils()
 	test(get_nb_len(52123) == 5);
 }
 */
+/*
 void test_square_root()
 {
-/*	test(get_group_num(529, 0) == 29);
+	test(get_group_num(529, 0) == 29);
 	test(get_group_num(529, 1) == 5);
 	test(get_group_num(529, 2) == 0);
 	test(get_group_num(529, -2) == 0);
-*/
-	/*int rest = 0;
+	int rest = 0;
 	int to_sub = 1;
 	test(treat_group(5, &rest, &to_sub) == 2);
 	test(rest == 1);
@@ -322,14 +322,33 @@ void test_square_root()
 	to_sub = 41;
 	test(treat_group(29, &rest, &to_sub) == 3);
 	test(rest == 0);
-	test(get_to_sub(3) == 41);*/
+	test(get_to_sub(3) == 41);
 	test(my_square_root(81) == 9);
 	test(my_square_root(529) == 23);
 	test(my_square_root(82) == 0);
 }
+*/
+void test_is_prime()
+{
+	test(my_is_prime(1) == 0);
+	test(my_is_prime(2) == 1);
+	test(my_is_prime(3) == 1);
+	test(my_is_prime(5) == 1);
+	test(my_is_prime(6) == 0);
+	test(my_is_prime(7) == 1);
+	test(my_is_prime(9) == 0);
+}
+
+void test_find_prime_sup()
+{
+	test(my_find_prime_sup(2) == 2);
+	test(my_find_prime_sup(3) == 3);
+	test(my_find_prime_sup(4) == 5);
+	test(my_find_prime_sup(9) == 11);
+}
 
 int main()
 {
-	test_square_root();
+	test_find_prime_sup();
 	return (0);
 }
