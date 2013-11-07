@@ -136,10 +136,14 @@ void test_my_factorielle_rec()
 */
 void test_my_power_it()
 {
-	/*
 	test(my_power_it(1, 2) == 1);
+	test(my_power_it(2, 0) == 1);
+	test(my_power_it(2, 1) == 2);
+	test(my_power_it(3, 3) == 27);
 	test(my_power_it(2, 2) == 4);
-	*/
+	test(my_power_it(2, -2) == 0);
+	test(my_power_it(9, 10) == 0);
+	test(my_power_it(-9, 2) == 81);
 }
 char *my_strcpy(char *dest, char *src);
 char *my_strncpy(char *dest, char *src, int n);
@@ -273,12 +277,12 @@ void test_showstr()
 }
 */
 
-void test_showmem()
+/*void test_showmem()
 {
 	my_showmem("Salut les aminches c'est cool show mem on fait de truc terrible", 5);
-}
+}*/
 int main()
 {
-	test_showmem();
+	test_my_power_it();
 	return (0);
 }
