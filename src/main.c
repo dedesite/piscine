@@ -404,7 +404,7 @@ void test_strcat()
 	free(dest);
 }
 */
-void test_strlcat()
+/*void test_strlcat()
 {
 	test(my_strlcat("Boobies", "a", 2) == 3);
 	char* buff = malloc(10);
@@ -418,9 +418,9 @@ void test_strlcat()
 	test(my_strlcat(buff, "gnug", 5) == 9);
 	free(buff);
 
-}
+}*/
 
-void test_convert_base()
+/*void test_convert_base()
 {
 	char *s;
 	s = convert_base("101010", "01", "0123456789ABCDEF");
@@ -429,9 +429,34 @@ void test_convert_base()
 	s = convert_base("BABABA", "AB", "ABCDEFGHIJKLMNOP");
 	test_str(s, "CK");
 	free(s);
+}*/
+
+void test_tab(char* str, char **tab)
+{
+	test_str(tab[0], "coucou");
+	test_str(tab[1], "les");
+	test_str(tab[2], "lapinous");
+	test(tab[3] == 0);
+	free(tab);
+	free(str);
+}
+void test_str_to_wordtab()
+{
+	test(count_str_words("coucou les lapinous") == 3);
+	test(count_str_words("   coucou les    lapinous  ") == 3);
+	test(count_str_words("coucou|les/lapinous  ") == 3);
+	char* str = my_strdup("coucou les lapinous");
+	char** tab = my_str_to_wordtab(str);
+	test_tab(str, tab);
+	str = my_strdup("   coucou les    lapinous  ");
+	tab = my_str_to_wordtab(str);
+	test_tab(str, tab);
+	str = my_strdup("coucou|les/lapinous  ");
+	tab = my_str_to_wordtab(str);
+	test_tab(str, tab);
 }
 int main()
 {
-	test_convert_base();
+	test_str_to_wordtab();
 	return (0);
 }
