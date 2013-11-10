@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include <my.h>
 
 void test(result)
@@ -344,10 +345,9 @@ void test_find_prime_sup()
 	test(my_find_prime_sup(9) == 11);
 }
 */
-
+/*
 void test_8r1()
 {
-/*
 	test(is_safe("02XXXXXX", 2, '5') == 1);
 	test(is_safe("7777070X", 7, '0') == 0);
 	test(is_safe("02XXXXXX", 2, '3') == 0);
@@ -358,13 +358,13 @@ void test_8r1()
 	test(is_safe("25XXXXXX", 2, '0') == 0);
 	test(is_safe("25X6XXXX", 2, '7') == 0);
 	test(is_safe("50X3XXXX", 2, '2') == 0);
-*/
 	my_8r1();
 	test(my_8r1() == 92);
 	my_8r2();
 	//my_put_nbr(my_8r1());
 }
-
+*/
+/*
 void test_strdup()
 {
 	char *s = my_strdup("coucou");
@@ -372,10 +372,29 @@ void test_strdup()
 	my_putstr("Should print coucou : ");
 	putline(s);
 }
-
+*/
+void test_strcat()
+{
+	char* dest;
+	char* after;
+	dest = malloc(10);
+	dest = my_strdup("coucou");
+	after = my_strcat(dest, "gnu");
+	test_str(dest, "coucougnu");
+	test(dest == after);
+	free(dest);
+	dest = my_strdup("coucou");
+	after = my_strncat(dest, "gnu", 2);
+	test_str(dest, "coucougn");
+	test(dest == after);
+	free(dest);
+	dest = my_strdup("coucou");
+	after = my_strncat(dest, "gnu", 4);
+	test_str(dest, "coucougnu");
+	free(dest);
+}
 int main()
 {
-	//test_strdup();
-	test_8r1();
+	test_strcat();
 	return (0);
 }

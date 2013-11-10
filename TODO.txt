@@ -2,15 +2,14 @@ TODO
 
 -Finir aff_combn => utiliser uniquement des entiers comme des tableaux d'entier qui vont de 0 a 9
 -my_getnbr doit faire moins de 25 lignes
+-check_reine et is_safe doivent faire moins de 25 lignes
 -gérer proprement l'overflow sur les factorielles et power
 -revoir le fonctionnement de strncpy => pourquoi ça marche pas comme je pense ??
+-Refaire my_strcmp et my_strncmp pour qu'ils correspondent au vrai fonctionnement de strcmp
+	=> Les valeurs de retour en cas de non égalité ne sont pas bonnes
+DONE
+
 -Faire les power
 -Faire les 8 reines 1 et 2
 -Faire my_square_root
 -Faire my_is_prime et my_find_prime_sup
--Refaire my_strcmp et my_strncmp pour qu'ils correspondent au vrai fonctionnement de strcmp
-	=> Les valeurs de retour en cas de non égalité ne sont pas bonnes
-s
-DONE
-
--Faire les power
