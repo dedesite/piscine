@@ -16,6 +16,12 @@ void test_str(char* s1, char* s2)
 	test(my_strcmp(s1, s2) == 0);
 }
 
+void test_put(char* s)
+{
+	putlineb("Should display \"");
+	my_putstr(s);
+	my_putstr("\" : ");
+}
 /*
 void test_my_put_nbr()
 {
@@ -256,7 +262,7 @@ void test_str_is()
 	test(my_str_isprintable("a\nioulkj32") == 0);
 }
 */
-/*
+
 void test_putnbr_base()
 {
 	putlineb("Devrait afficher : 101010 ");
@@ -270,8 +276,8 @@ void test_putnbr_base()
 	putlineb("Devrait afficher : -4C8 ");
 	my_putnbr_base(-1224, "0123456789ABCDEF");
 }
-*/
-/*
+
+
 void test_getnbr_base()
 {
 	test(my_getnbr_base("-42", "0123456789") == -42);
@@ -280,7 +286,7 @@ void test_getnbr_base()
 	test(my_getnbr_base("-4C8", "0123456789ABCDEF") == -1224);
 	test(my_getnbr_base("--4C8abc", "0123456789ABCDEF") == 1224);
 }
-
+/*
 void test_showstr()
 {
 	putlineb("Devrait afficher : coucou \\0a\\07\\0d ca va ? ");
@@ -414,8 +420,18 @@ void test_strlcat()
 
 }
 
+void test_convert_base()
+{
+	char *s;
+	s = convert_base("101010", "01", "0123456789ABCDEF");
+	test_str(s, "2A");
+	free(s);
+	s = convert_base("BABABA", "AB", "ABCDEFGHIJKLMNOP");
+	test_str(s, "CK");
+	free(s);
+}
 int main()
 {
-	test_strlcat();
+	test_convert_base();
 	return (0);
 }

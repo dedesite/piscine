@@ -33,5 +33,6 @@ char *my_strcat(char *dest, char *src);
 char *my_strncat(char *dest, char *src, int nb);
 int my_strlcat(char *dest, char *src, int size);
 char* my_strdup(char* str);
+char *convert_base(char *nbr, char *base_from, char *base_to);
 
 #endif
