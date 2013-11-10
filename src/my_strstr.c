@@ -32,3 +32,15 @@ char *my_strstr(char *str, char *to_find)
 		return (0);
 	}
 }
+
+/**
+** Helper pour chercher avec un char
+*/
+char *my_strchr(char *str, char to_find)
+{
+	char s[2];
+
+	s[0] = to_find;
+	s[1] = '\0';
+	return my_strstr(str, s);
+}

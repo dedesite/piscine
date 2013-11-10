@@ -1,4 +1,5 @@
 #include <string.h>
+#include <my.h>
 
 void test(result)
 {
@@ -80,7 +81,6 @@ void test_mystrlen()
 	*/
 }
 
-char* my_evil_str(char*);
 void test_my_evil_str()
 {
 	/*
@@ -156,9 +156,7 @@ void test_my_power_rec()
 	test(my_power_rec(-9, 2) == 81);
 }
 */
-char *my_strcpy(char *dest, char *src);
-char *my_strncpy(char *dest, char *src, int n);
-char* my_revstr(char*);
+
 /*void test_strcpy()
 {
 	char str[5];
@@ -204,8 +202,7 @@ void test_strcmp()
 	test(my_strncmp("abcd", "ab", 8) == 1);
 }
 */
-char *my_strupcase(char *str);
-char *my_strlowcase(char *str);
+
 /*void test_strupcase()
 {
 	test(strcmp(my_strupcase(strdup("salUt cA va ?")), "SALUT CA VA ?") == 0);
@@ -216,7 +213,6 @@ char *my_strlowcase(char *str);
 	test(strcmp(my_strlowcase(strdup("salUt cA va ?")), "salut ca va ?") == 0);
 }*/
 
-char *my_strcapitalize(char *str);
 /*
 void test_strcapitalize()
 {
@@ -348,13 +344,38 @@ void test_find_prime_sup()
 	test(my_find_prime_sup(9) == 11);
 }
 */
+
 void test_8r1()
 {
-	my_put_nbr(my_8r1());
+/*
+	test(is_safe("02XXXXXX", 2, '5') == 1);
+	test(is_safe("7777070X", 7, '0') == 0);
+	test(is_safe("02XXXXXX", 2, '3') == 0);
+	test(is_safe("02XXXXXX", 2, '1') == 0);
+	test(is_safe("02XXXXXX", 2, '2') == 0);
+	test(is_safe("025XXXXX", 2, '7') == 0);
+	test(is_safe("05XXXXXX", 2, '2') == 0);
+	test(is_safe("25XXXXXX", 2, '0') == 0);
+	test(is_safe("25X6XXXX", 2, '7') == 0);
+	test(is_safe("50X3XXXX", 2, '2') == 0);
+*/
+	my_8r1();
+	test(my_8r1() == 92);
+	my_8r2();
+	//my_put_nbr(my_8r1());
+}
+
+void test_strdup()
+{
+	char *s = my_strdup("coucou");
+	test(my_strlen(s) == 6);
+	my_putstr("Should print coucou : ");
+	putline(s);
 }
 
 int main()
 {
+	//test_strdup();
 	test_8r1();
 	return (0);
 }
