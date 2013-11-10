@@ -158,12 +158,13 @@ void test_my_power_rec()
 }
 */
 
-/*void test_strcpy()
+void test_strcpy()
 {
 	char str[5];
-	test(strcmp(my_strcpy(str, "test"), "test") == 0);
+	test_str(my_strcpy(str, "test"), "test");
+	test_str(my_strcpy(str, "tes"), "tes");
 }
-
+/*
 void test_strncpy()
 {
 	char str[5];
@@ -173,7 +174,8 @@ void test_strncpy()
 	test(strcmp(my_strncpy(str, "test", 7), "test") == 0);
 	//my_putstr(str);
 }
-
+*/
+/*
 void test_revstr()
 {
 	char str[6] = "testa";
@@ -186,7 +188,8 @@ void test_strstr()
 	test(strcmp(my_strstr("coucou les lapinous", "les"), "les lapinous") == 0);
 	test(my_strstr("test ou les lapins", "rac") == NULL);
 	test(strcmp(my_strstr("les bananes c'est bon", "bo"), "bon") == 0);
-}*/
+}
+*/
 /*
 void test_strcmp()
 {
@@ -373,28 +376,46 @@ void test_strdup()
 	putline(s);
 }
 */
+/*
 void test_strcat()
 {
 	char* dest;
 	char* after;
 	dest = malloc(10);
-	dest = my_strdup("coucou");
+	dest = my_strcpy("coucou");
 	after = my_strcat(dest, "gnu");
 	test_str(dest, "coucougnu");
 	test(dest == after);
 	free(dest);
-	dest = my_strdup("coucou");
+	dest = my_strcpy("coucou");
 	after = my_strncat(dest, "gnu", 2);
 	test_str(dest, "coucougn");
 	test(dest == after);
 	free(dest);
-	dest = my_strdup("coucou");
+	dest = my_strcpy("coucou");
 	after = my_strncat(dest, "gnu", 4);
 	test_str(dest, "coucougnu");
 	free(dest);
 }
+*/
+void test_strlcat()
+{
+	test(my_strlcat("Boobies", "a", 2) == 3);
+	char* buff = malloc(10);
+	buff = my_strcpy(buff, "coucou");
+	test(my_strlcat(buff, "gnu", 10) == 9);
+	buff = my_strcpy(buff, "coucou");
+	test(my_strlcat(buff, "gnug", 6) == 10);
+	buff = my_strcpy(buff, "coucou");
+	test(my_strlcat(buff, "gnugnu", 10) == 12);
+	buff = my_strcpy(buff, "coucou");
+	test(my_strlcat(buff, "gnug", 5) == 9);
+	free(buff);
+
+}
+
 int main()
 {
-	test_strcat();
+	test_strlcat();
 	return (0);
 }
