@@ -41,4 +41,6 @@ int is_alpha(char c);
 int is_alphanum(char c);
 int is_printable(char c);
 char **my_str_to_wordtab(char *str);
+int is_big_endian(void);
+
 #endif

@@ -455,8 +455,15 @@ void test_str_to_wordtab()
 	tab = my_str_to_wordtab(str);
 	test_tab(str, tab);
 }
+
+void test_big_endian()
+{
+	//Difficile à tester sur une machine big endian...
+	test(is_big_endian()); 
+}
+
 int main()
 {
-	test_str_to_wordtab();
+	test_big_endian();
 	return (0);
 }
