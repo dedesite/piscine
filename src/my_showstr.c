@@ -1,4 +1,6 @@
-int my_showstr(char *str)
+#include <my.h>
+
+void my_showstr(char *str)
 {
 	int i;
 

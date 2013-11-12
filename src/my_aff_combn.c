@@ -1,3 +1,5 @@
+#include <my.h>
+
 int add_one_at_pos(nb, pos)
 {
 	int power;

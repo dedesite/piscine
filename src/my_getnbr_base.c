@@ -1,3 +1,5 @@
+#include <my.h>
+
 int is_inbase(char c, char* base)
 {
 	int i;

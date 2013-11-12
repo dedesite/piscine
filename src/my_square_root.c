@@ -1,3 +1,4 @@
+#include <my.h>
 /**
 ** Renvoie un groupe de 2 nombres maximum
 ** a la position indiquée

@@ -1,3 +1,5 @@
+#include <my.h>
+
 int my_str_isalpha(char *str)
 {
 	while(*str && is_alpha(*str))

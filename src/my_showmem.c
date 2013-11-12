@@ -1,3 +1,5 @@
+#include <my.h>
+
 void show_line(char* str, int size)
 {
 	int i;

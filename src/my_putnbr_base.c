@@ -1,3 +1,5 @@
+#include <my.h>
+
 void my_convertnbr_base_rec(int nbr, char* base, int base_len, char* str)
 {
 	if(nbr < 0)

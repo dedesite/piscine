@@ -1,3 +1,5 @@
+#include <my.h>
+
 void display_numbers(char first_1, char first_2, char second_1, char second_2, int display_comma)
 {
 	if(display_comma)

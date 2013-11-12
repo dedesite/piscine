@@ -1,3 +1,5 @@
+#include <my.h>
+
 int my_str_isprintable(char *str)
 {
 	while(*str && is_printable(*str))

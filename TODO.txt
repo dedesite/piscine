@@ -1,5 +1,6 @@
 TODO
 
+-Tester my_showmen sur 64bits car affiche l'adresse comme si c'était un int...
 -Finir aff_combn => utiliser uniquement des entiers comme des tableaux d'entier qui vont de 0 a 9
 -my_getnbr doit faire moins de 25 lignes
 -check_reine et is_safe doivent faire moins de 25 lignes
