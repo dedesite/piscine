@@ -66,5 +66,6 @@ int my_factorielle_rec(int nb);
 int is_word_start(char* str, int i);
 int is_word_end(char* str, int i);
 int count_str_words(char* str);
+int find_in_tab(char** tab, int size, char* to_find);
 
 #endif

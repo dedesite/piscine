@@ -1,0 +1,12 @@
+#include <my.h>
+#include <s_opp.h>
+#include <my_opp.h>
+
+int check_params(int argc, char** argv)
+{
+  if(arc != 4)
+    return (0);
+  if(my_getnbr(argv[1]) == 0 || my_getnbr(argv[1]) == 0)
+    return (0);
+  if(
+}

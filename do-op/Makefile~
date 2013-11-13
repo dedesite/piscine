@@ -1,0 +1,13 @@
+NAME=	do-op
+
+RM=	rm -f
+
+CC=	gcc -Wall
+
+$(NAME):
+	$(CC) do-op do-op.c
+	
+all:	$(NAME) clean
+
+clean:
+	$(RM) $(NAME)

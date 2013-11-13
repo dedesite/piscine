@@ -47,7 +47,7 @@ int count_str_words(char* str)
 	nb_words = 0;
 	while (str[i])
 	{
-		if(is_word_begining(str, i))
+		if(is_word_start(str, i))
 			nb_words = nb_words + 1;
 		i = i + 1;
 	}

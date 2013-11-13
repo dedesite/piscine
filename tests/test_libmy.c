@@ -443,8 +443,17 @@ void test_big_endian()
 	test(is_big_endian()); 
 }
 
+void test_find_in_tab()
+{
+	char* tab[3] = {"coucou", "les", "lapinous"};
+	test(find_in_tab(tab, 3, "coucou") == 0);
+	test(find_in_tab(tab, 3, "les") == 1);
+	test(find_in_tab(tab, 3, "lapinous") == 2);
+	test(find_in_tab(tab, 3, "lapinou") == -1);
+}
+
 int main()
 {
-	test_big_endian();
+	test_find_in_tab();
 	return (0);
 }

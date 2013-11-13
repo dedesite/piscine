@@ -2,7 +2,7 @@
 
 RM=	rm -f
 
-CC=	gcc -c -Wall -Iinclude
+CC=	gcc -Wall -Iinclude
 
 NAME=	libmy.a
 
@@ -13,7 +13,7 @@ OBJ=	*.o
 all: 	link clean
 
 build:
-	$(CC) $(SRC)
+	$(CC) -c $(SRC)
 
 link: build
 	ar rc $(NAME) $(OBJ)
@@ -22,6 +22,10 @@ link: build
 
 clean:
 	$(RM) *.o
+
+test:	link clean
+	$(CC) -o tests/test_libmy tests/test_libmy.c -lmy -Llib
+	tests/test_libmy
 
 fclean:	clean
 	$(RM) $(NAME)
