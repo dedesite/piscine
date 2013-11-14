@@ -1,6 +1,8 @@
 #ifndef MY_H_
 # define MY_H_
 
+#include <mylist.h>
+
 void my_putchar(char c);
 void my_isneg(int nb);
 void my_put_nbr(int nb);
@@ -71,5 +73,9 @@ int count_str_words(char* str);
 int find_in_tab(char** tab, int size, char* to_find);
 void my_sort_wordtab(char **tab);
 void my_advanced_sort_wordtab(char **tab, int(*cmp)(char *, char *));
-
+t_list* add_in_list(void* data, t_list* list);
+t_list *my_params_in_list(int ac, char **av);
+int my_list_size(t_list *begin);
+void my_rev_list(t_list **begin);
+void my_apply_on_list(t_list *begin, void (*f)(void*));
 #endif

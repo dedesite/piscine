@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <my.h>
+#include <mylist.h>
 
 void test(result)
 {
@@ -486,8 +487,62 @@ void test_put_ptr()
 	putline("");
 }
 
+void test_add_in_list()
+{
+	t_list* l;
+
+	l = add_in_list("coucou", 0);
+	test_str(l->data, "coucou");
+	test(l->next == 0);
+	l = add_in_list("lapinou", l);
+	test_str(l->data, "lapinou");
+	test_str(l->next->data, "coucou");	
+}
+
+void test_params_in_list()
+{
+	t_list* l;
+	char* tab[2] = {"coucou", "lapinou"};
+
+	l = my_params_in_list(2, tab);
+	test_str(l->data, "lapinou");
+}
+
+void test_my_list_size()
+{	
+	t_list* l;
+	char* tab[2] = {"coucou", "lapinou"};
+
+	l = my_params_in_list(2, tab);
+	test(my_list_size(l) == 2);
+}
+
+void test_rev_list()
+{
+	t_list* l;
+	char* tab[4] = {"coucou", "les", "lapinous", "africains"};
+	l = my_params_in_list(4, tab);
+	my_rev_list(&l);
+	test_str(l->data, "coucou");
+	test_str(l->next->data, "les");
+}
+
+void rev_str_list(void* s)
+{
+	my_revstr(s);
+}
+
+void test_apply_on_list()
+{
+	t_list* l;
+	char* tab[4] = {my_strdup("coucou"), my_strdup("les"), my_strdup("lapinous"), my_strdup("africains")};
+	l = my_params_in_list(4, tab);
+	my_apply_on_list(l, rev_str_list);
+	test_str(l->data, "sniacirfa");
+}
+
 int main()
 {
-	test_advanced_sort_word_tab();
+	test_apply_on_list();
 	return (0);
 }
