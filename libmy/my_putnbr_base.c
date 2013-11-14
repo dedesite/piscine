@@ -31,3 +31,19 @@ void my_putnbr_base(int nbr, char *base)
 	my_revstr(str);
 	my_putstr(str);
 }
+
+void my_putptr_base(void* ptr, char* base)
+{
+	int* tab;
+	int nb_put;
+	int i;
+
+	tab = (int*)ptr;
+	nb_put = sizeof(void*) / sizeof(int);
+	i = 0;
+	while(i < nb_put)
+	{
+		my_putnbr_base(tab[i], base);
+		i = i + 1;
+	}
+}

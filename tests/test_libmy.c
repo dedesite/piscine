@@ -299,6 +299,9 @@ void test_mathutils()
 	test(get_nb_len(52123) == 5);
 }
 
+int get_group_num(int nb, int pos);
+int get_to_sub(int last_sub);
+int treat_group(int group, int* rest, int* to_sub);
 void test_square_root()
 {
 	test(get_group_num(529, 0) == 29);
@@ -339,6 +342,7 @@ void test_find_prime_sup()
 	test(my_find_prime_sup(9) == 11);
 }
 
+int is_safe(char* chessboard, int x, char y);
 void test_8r1()
 {
 	test(is_safe("02XXXXXX", 2, '5') == 1);
@@ -452,8 +456,29 @@ void test_find_in_tab()
 	test(find_in_tab(tab, 3, "lapinou") == -1);
 }
 
+void test_sort_word_tab()
+{
+	char* tab[4] = {"coucou", "les", "lapinous", 0};
+	my_sort_wordtab(tab);
+	test_str(tab[0], "coucou");
+	test_str(tab[1], "lapinous");
+	test_str(tab[2], "les");
+}
+
+void test_put_ptr()
+{
+	int i;
+
+	i = 0;
+	test_put("pointer adresse in Hexa");
+	my_putptr_base(&i, "0123456789ABCDEF");
+	test_put("pointer adresse in base 10");
+	my_put_ptr(&i);
+	putline("");
+}
+
 int main()
 {
-	test_find_in_tab();
+	test_sort_word_tab();
 	return (0);
 }

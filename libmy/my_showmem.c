@@ -4,7 +4,7 @@ void show_line(char* str, int size)
 {
 	int i;
 
-	my_putnbr_base(str, "0123456789ABCDEF");
+	my_putptr_base(str, "0123456789ABCDEF");
 	my_putstr(": ");
 	i = 0;
 	while(i < size)

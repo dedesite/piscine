@@ -4,6 +4,7 @@
 void my_putchar(char c);
 void my_isneg(int nb);
 void my_put_nbr(int nb);
+void my_put_ptr(void* ptr);
 void my_swap(int *a, int *b);
 void my_putstr(char *str);
 void putline(char* str);
@@ -50,6 +51,7 @@ char **my_str_to_wordtab(char *str);
 int is_big_endian(void);
 void my_convertnbr_base_rec(int nbr, char* base, int base_len, char* str);
 void my_putnbr_base(int nbr, char *base);
+void my_putptr_base(void* ptr, char* base);
 int is_lower(char c);
 int is_upper(char c);
 int is_num(char c);
@@ -67,5 +69,6 @@ int is_word_start(char* str, int i);
 int is_word_end(char* str, int i);
 int count_str_words(char* str);
 int find_in_tab(char** tab, int size, char* to_find);
+void my_sort_wordtab(char **tab);
 
 #endif
