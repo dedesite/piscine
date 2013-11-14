@@ -1,43 +1,14 @@
 #include <my.h>
 #include <s_opp.h>
 
-void my_add(int a, int b)
+int check_params(int argc, char** argv)
 {
-  my_put_nbr(a + b);
+  if(argc != 4)
+    return (0);
+  if(my_getnbr(argv[1]) == 0 || my_getnbr(argv[3]) == 0)
+    return (0);
+  return (1);
 }
-
-void my_sub(int a, int b)
-{
-  my_put_nbr(a - b);
-}
-
-void my_mul(int a, int b)
-{
-  my_put_nbr(a * b);
-}
-
-void my_div(int a, int b)
-{
-  if(b != 0)
-    my_put_nbr(a / b);
-  else
-    my_putstr("Stop : division by zero");
-}
-
-void my_mod(int a, int b)
-{
-  if(b != 0)
-    my_put_nbr(a % b);
-  else
-    my_putstr("Stop : modulo by zero");
-}
-
-void my_usage(int a, int b)
-{
-  my_putstr("error : only [ + - / * % ] are supported");
-}
-
-#include <my_opp.h>
 
 int is_opp(char* str)
 {
@@ -53,26 +24,22 @@ int is_opp(char* str)
   return (i);
 }
 
-int check_params(int argc, char** argv)
+void do_op(char* num_1, char* opp, char* num_2)
 {
-  if(argc != 4)
-    return (0);
-  if(my_getnbr(argv[1]) == 0 || my_getnbr(argv[3]) == 0)
-    return (0);
-  return (1);
+  int opp_ind;
+
+  opp_ind = is_opp(opp);
+  gl_opptab[opp_ind].fct(my_getnbr(num_1), my_getnbr(num_2));
+  my_putchar('\n');
 }
 
 int main(int argc, char** argv)
 {
-  int opp_ind;
-
   if(!check_params(argc, argv))
     {
       putline("0");
       return (0);
     }
-  opp_ind = is_opp(argv[2]);
-  gl_opptab[opp_ind].fct(my_getnbr(argv[1]), my_getnbr(argv[3]));
-  my_putchar('\n');
+  do_op(argv[1], argv[2], argv[3]);
   return (0);
 }

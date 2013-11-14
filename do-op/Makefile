@@ -2,16 +2,18 @@ NAME=	do-op
 
 RM=	rm -f
 
-CC=	gcc -Wall -o
+CFLAGS=	-Wall -I../include
+
+LIB=-lmy -L../lib
+
+CC=	gcc
 
 $(NAME):
-	$(CC) $(NAME) do-op.c
-
-test:
-	$(CC) test test_do-op.c
-	./test
+	$(CC) $(CFLAGS) -o $(NAME) do-op.c my_opp.c $(LIB)
 
 all:	$(NAME) clean
 
 clean:
 	$(RM) $(NAME)
+
+.PHONY:	$(NAME) all clean

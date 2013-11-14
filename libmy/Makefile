@@ -31,3 +31,4 @@ test:	link clean
 
 fclean:	clean
 	$(RM) ../lib/$(NAME)
+	$(RM) $(NAME)
