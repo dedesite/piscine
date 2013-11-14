@@ -1,4 +1,7 @@
 *.out
+*/*.o
+*/*.a
+tests/test_libmy
 énoncés/
 lib/
 videos/
