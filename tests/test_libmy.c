@@ -465,6 +465,15 @@ void test_sort_word_tab()
 	test_str(tab[2], "les");
 }
 
+void test_advanced_sort_word_tab()
+{
+	char* tab[4] = {"coucou", "les", "lapinous", 0};
+	my_advanced_sort_wordtab(tab, my_strcmp);
+	test_str(tab[0], "coucou");
+	test_str(tab[1], "lapinous");
+	test_str(tab[2], "les");
+}
+
 void test_put_ptr()
 {
 	int i;
@@ -479,6 +488,6 @@ void test_put_ptr()
 
 int main()
 {
-	test_sort_word_tab();
+	test_advanced_sort_word_tab();
 	return (0);
 }
