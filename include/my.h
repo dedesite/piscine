@@ -1,5 +1,5 @@
-#ifndef _MY_H_
-# define _MY_H_
+#ifndef MY_H_
+# define MY_H_
 
 void my_putchar(char c);
 void my_isneg(int nb);

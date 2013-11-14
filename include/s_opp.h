@@ -1,5 +1,5 @@
-#ifndef _S_OPP_H_
-# define _S_OPP_H_
+#ifndef S_OPP_H_
+# define S_OPP_H_
 
 typedef struct s_opp
 {
