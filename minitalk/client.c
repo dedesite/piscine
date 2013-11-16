@@ -1,6 +1,7 @@
 #include <sys/types.h>
 #include <signal.h>
 #include <unistd.h>
+#include <stdio.h>
 #include <minitalk_common.h>
 #include <my.h>
 
@@ -33,11 +34,21 @@ void send_msg(pid_t pid, char* msg)
 
 int main(int argc, char** argv)
 {
-    if(argc != 3)
+    char buff[4096];
+    pid_t server_pid;
+
+    if(argc < 2)
         return (0);
-    else
+    server_pid = my_getnbr(argv[1]);
+    while(42)
     {
-        send_msg(my_getnbr(argv[1]), argv[2]);
+        my_putstr("$>");
+        if(fgets (buff, 4096, stdin) != NULL)
+        {
+            my_putstr(buff);
+            send_msg(server_pid, buff);
+            buff[0] = 0;
+        }
     }
     return (0);
 }

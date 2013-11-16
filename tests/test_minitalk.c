@@ -23,7 +23,7 @@ void test_append_bit_to_display()
     int i;
     int bit;
 
-    test_put("coucou");
+    test_put("42:coucou84:coucou");
     s_ind = 0;
     while ((s[s_ind] && s_ind == 0) || s[s_ind - 1])
     {
@@ -31,7 +31,8 @@ void test_append_bit_to_display()
         while (i >= 0)
         {
             bit = get_bit_at(s[s_ind], i);
-            append_bit_to_display(bit);
+            append_bit_to_display(42, bit);
+            append_bit_to_display(84, bit);
             i--;
         }
         s_ind++;
@@ -41,6 +42,7 @@ void test_append_bit_to_display()
 
 int main()
 {
+    test_append_bit_to_display();
     test_append_bit_to_display();
     return (0);
 }

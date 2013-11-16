@@ -523,6 +523,10 @@ void test_apply_on_list()
 
 int main()
 {
+	test_add_in_list();
+	test_params_in_list();
+	test_my_list_size();
+	test_rev_list();
 	test_apply_on_list();
 	return (0);
 }
