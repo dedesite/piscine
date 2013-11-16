@@ -9,9 +9,10 @@ TEST	=	../tests/test_minitalk
 
 all: $(NAME)
 
-$(NAME):
+$(NAME):	$(OBJ)
 	$(CC) -o client $(CFLAGS) client.c $(COMMON) $(LDFLAGS)
 	$(CC) -o server $(CFLAGS) server.c $(COMMON) $(LDFLAGS)
+
 
 test:	$(NAME)
 	$(CC) -o $(TEST) $(TEST).c $(COMMON) $(LDFLAGS) $(CFLAGS)

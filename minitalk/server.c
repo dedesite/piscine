@@ -20,9 +20,9 @@ void recieve(int sig, siginfo_t *siginfo, void *context)
 ** malloc d'un programme prenait plus de temps que les autres et donc
 ** qu'on manquait un signal la première fois...
 ** C'est crade mais ça fonctionne...
-** TODO : implémenter une gestion des erreurs, genre quand on a pas reçu de
-** signal depuis plus d'une seconde de la part d'un client et qu'il a toujours
-** des données buffered, on les affiche tout de même
+** J'ai géré ce type d'erreur grave à treat_pending_msg mais je préfère
+** laisser l'init comme ça on a pas l'erreur au début
+**
 */
 void init()
 {

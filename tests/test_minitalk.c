@@ -1,3 +1,4 @@
+#include <unistd.h>
 #include <test.h>
 #include <minitalk_common.h>
 #include <my.h>
@@ -40,9 +41,37 @@ void test_append_bit_to_display()
     putline("");
 }
 
+void test_check_errors()
+{
+    char* s = "coucou";
+    int s_ind;
+    int i;
+    int bit;
+
+    test_put("scramble something");
+    s_ind = 0;
+    while ((s[s_ind] && s_ind == 0) || s[s_ind - 1])
+    {
+        i = 7;
+        while (i >= 0)
+        {
+            bit = get_bit_at(s[s_ind], i);
+            append_bit_to_display(42, bit);
+            i--;
+            //Don't push the last bit
+            if(s_ind == 6 && i == 1)
+                i--;
+        }
+        s_ind++;
+    }
+    sleep(2);
+    append_bit_to_display(42, 1);
+}
+
 int main()
 {
     test_append_bit_to_display();
     test_append_bit_to_display();
+    test_check_errors();
     return (0);
 }
