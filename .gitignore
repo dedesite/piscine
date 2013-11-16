@@ -1,7 +1,10 @@
 *.out
 */*.o
 */*.a
-tests/test_libmy
+tests/a.out
+tests/test*
 énoncés/
 lib/
 videos/
+minitalk/client
+minitalk/server
