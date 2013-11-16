@@ -27,8 +27,6 @@ void append_bit_to_display(int bit)
         buffer[current_ind] = c;
         nb_bits = 0;
         c = 0;
-        
-        //putline("");
         if(buffer[current_ind] == '\0')
         {
             my_putstr(buffer);
