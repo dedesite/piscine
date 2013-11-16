@@ -47,6 +47,15 @@ t_bit_msg* find_or_add_msg(pid_t pid, t_list** l)
     return (msg);
 }
 
+char append_bit_to_char(char c, int bit)
+{
+    if(bit == 1)
+        c = (c << 1) | 0x01;
+    else
+        c = (c << 1);
+    return (c);
+}
+
 /**
 ** Append a bit to a buffered string (one per pid) which is display
 ** when a null char is detected
@@ -57,10 +66,7 @@ void append_bit_to_display(pid_t pid, int bit)
     t_bit_msg* msg;
 
     msg = find_or_add_msg(pid, &l);
-    if(bit == 1)
-        msg->c = (msg->c << 1) | 0x01;
-    else
-        msg->c = (msg->c << 1);
+    msg->c = append_bit_to_char(msg->c, bit);
     msg->nb_bits++;
     if(msg->nb_bits >= 8)
     {
@@ -70,8 +76,8 @@ void append_bit_to_display(pid_t pid, int bit)
         if(msg->buffer[msg->current_ind] == '\0')
         {
             my_put_nbr(pid);
-            my_putstr(" says : ");
-            putline(msg->buffer);
+            my_putstr(":");
+            my_putstr(msg->buffer);
             msg->current_ind = 0;
         }
         else

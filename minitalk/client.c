@@ -24,7 +24,10 @@ void send_msg(pid_t pid, char* msg)
             else
                 res = kill(pid, SIGUSR2);
             if(res != 0)
-                putline("error sending signal");
+            {
+                putline("error while sending signal");
+                return;
+            }
             bit_ind--;
             usleep(10);
         }
@@ -45,7 +48,6 @@ int main(int argc, char** argv)
         my_putstr("$>");
         if(fgets (buff, 4096, stdin) != NULL)
         {
-            my_putstr(buff);
             send_msg(server_pid, buff);
             buff[0] = 0;
         }
