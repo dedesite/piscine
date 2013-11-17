@@ -406,6 +406,31 @@ void test_tab(char* str, char **tab)
 	free(str);
 }
 
+void test_count_str_token()
+{
+	test(count_str_token("coucou", 'c') == 2);
+	test(count_str_token("salut|toi|ca|va", '|') == 3);
+	test(count_str_token("salut|toi|ca|va", 'z') == 0);
+}
+
+void test_split_str()
+{
+	char* str = my_strdup("coucou les lapinous");
+	char** tab = split_str(str, ' ');
+	test_tab(str, tab);
+	str = my_strdup("coucou|les|lapinous");
+	tab = split_str(str, '|');
+	test_tab(str, tab);
+	str = my_strdup("|coucou||les|lapinous");
+	tab = split_str(str, '|');
+	test(tab[0][0] == 0);
+	test_str(tab[1], "coucou");
+	test(tab[2][0] == 0);
+	test_str(tab[3], "les");
+	free(str);
+	free(tab);
+}
+
 void test_str_to_wordtab()
 {
 	test(count_str_words("coucou les lapinous") == 3);
@@ -523,10 +548,7 @@ void test_apply_on_list()
 
 int main()
 {
-	test_add_in_list();
-	test_params_in_list();
-	test_my_list_size();
-	test_rev_list();
-	test_apply_on_list();
+	test_count_str_token();
+	test_split_str();
 	return (0);
 }

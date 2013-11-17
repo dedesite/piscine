@@ -78,4 +78,6 @@ t_list *my_params_in_list(int ac, char **av);
 int my_list_size(t_list *begin);
 void my_rev_list(t_list **begin);
 void my_apply_on_list(t_list *begin, void (*f)(void*));
+int count_str_token(char* str, char token);
+char** split_str(char* str, char token);
 #endif
