@@ -53,3 +53,17 @@ int count_str_words(char* str)
 	}
 	return nb_words;
 }
+
+int get_char_pos(char* s, char c)
+{
+	int i;
+
+	i = 0;
+	while(s[i])
+	{
+		if(s[i] == c)
+			return i;
+		i++;
+	}
+	return (-1);
+}

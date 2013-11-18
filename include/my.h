@@ -43,12 +43,6 @@ int my_strlcat(char *dest, char *src, int size);
 char* my_strdup(char* str);
 int my_getnbr_base(char *nbr, char *base);
 char *convert_base(char *nbr, char *base_from, char *base_to);
-int is_lower(char c);
-int is_upper(char c);
-int is_num(char c);
-int is_alpha(char c);
-int is_alphanum(char c);
-int is_printable(char c);
 char **my_str_to_wordtab(char *str);
 int is_big_endian(void);
 void my_convertnbr_base_rec(int nbr, char* base, int base_len, char* str);
@@ -80,4 +74,6 @@ void my_rev_list(t_list **begin);
 void my_apply_on_list(t_list *begin, void (*f)(void*));
 int count_str_token(char* str, char token);
 char** split_str(char* str, char token);
+int get_char_pos(char* s, char c);
+
 #endif

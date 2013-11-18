@@ -162,7 +162,6 @@ void test_revstr()
 	test(my_strcmp(my_revstr(str), "atset") == 0);
 }
 
-char *my_strstr(char *str, char *to_find);
 void test_strstr()
 {
 	test(my_strcmp(my_strstr("coucou les lapinous", "les"), "les lapinous") == 0);
@@ -546,9 +545,16 @@ void test_apply_on_list()
 	test_str(l->data, "sniacirfa");
 }
 
+void test_get_char_pos()
+{
+	test(get_char_pos("coucou", 'c') == 0);
+	test(get_char_pos("coucou", 'o') == 1);
+	test(get_char_pos("coucou", 'u') == 2);
+	test(get_char_pos("coucou", 'z') == -1);
+}
+
 int main()
 {
-	test_count_str_token();
-	test_split_str();
+	test_get_char_pos();
 	return (0);
 }
