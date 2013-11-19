@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <mylist.h>
 
-t_list* add_in_list(void* data, t_list* list)
+t_list* my_list_add(void* data, t_list* list)
 {
 	t_list* l;
 
@@ -20,7 +20,7 @@ t_list *my_params_in_list(int ac, char **av)
 	l = 0;
 	while(i < ac)
 	{
-		l = add_in_list(av[i], l);
+		l = my_list_add(av[i], l);
 		i = i + 1;
 	}
 	return (l);

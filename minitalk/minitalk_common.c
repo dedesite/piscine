@@ -21,7 +21,7 @@ t_list* add_client(pid_t pid, t_list* l)
     msg->nb_bits = 0;
     msg->current_ind = 0;
     msg->c = 0;
-    l = add_in_list(msg, l);
+    l = my_list_add(msg, l);
     return (l);
 }
 

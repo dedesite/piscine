@@ -16,16 +16,16 @@ int is_expr_valid(char* expr, char* base, char* operators)
     return (1);
 }
 
-int is_operator(char* word, char* operators)
+int is_operator(char* token, char* operators)
 {
-    if(my_strlen(word) != 1)
+    if(my_strlen(token) != 1)
         return (0);
-    return (my_strstr(&operators[2], word) != 0);
+    return (my_strstr(&operators[2], token) != 0);
 }
 
 /**
 ** A valider l'odre des opérateurs prioritaire avec le sujet de la bistro
-** Pour l'instant c'est ()/*-+%
+** Pour l'instant c'est ()/ *-+%
 */
 int is_operator_prioritary(char* op_1, char* op_2, char* operators)
 {
@@ -39,26 +39,26 @@ int is_operator_prioritary(char* op_1, char* op_2, char* operators)
     return (0);
 }
 
-int is_operand(char* word, char* base)
+int is_operand(char* token, char* base)
 {
     int i;
 
     i = 0;
-    while(word[i])
+    while(token[i])
     {
-        if(my_strchr(base, word[i]) == 0)
+        if(my_strchr(base, token[i]) == 0)
             return (0);
         i++;
     }
     return (1);
 }
 
-int is_parenthesis(char* word, char* operators, int open)
+int is_parenthesis(char* token, char* operators, int open)
 {
-    if(my_strlen(word) != 1)
+    if(my_strlen(token) != 1)
         return (0);
     if(open)
-        return (word[0] == operators[0]);
+        return (token[0] == operators[0]);
     else
-        return (word[0] == operators[1]);
+        return (token[0] == operators[1]);
 }

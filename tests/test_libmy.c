@@ -491,16 +491,28 @@ void test_put_ptr()
 	putline("");
 }
 
-void test_add_in_list()
+void test_my_list_add()
 {
 	t_list* l;
 
-	l = add_in_list("coucou", 0);
+	l = my_list_add("coucou", 0);
 	test_str(l->data, "coucou");
 	test(l->next == 0);
-	l = add_in_list("lapinou", l);
+	l = my_list_add("lapinou", l);
 	test_str(l->data, "lapinou");
 	test_str(l->next->data, "coucou");	
+}
+
+void test_my_list_pop()
+{
+	t_list* l;
+	t_list* first;
+
+	first = my_list_add("coucou", 0);
+	l = my_list_add("lapinou", first);
+	char* s = my_list_pop(&l);
+	test_str(s, "lapinou");
+	test(l == first);
 }
 
 void test_params_in_list()
@@ -555,6 +567,6 @@ void test_get_char_pos()
 
 int main()
 {
-	test_get_char_pos();
+	test_my_list_pop();
 	return (0);
 }
