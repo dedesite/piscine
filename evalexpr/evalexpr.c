@@ -79,7 +79,7 @@ int eval_expr(char* str)
 
     tab = expr_to_tab(str, "0123456789", "()/*-+%");
     if(tab == 0)
-        return (tab);
+        return (0);
 
     return (0);
 }

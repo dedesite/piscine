@@ -12,7 +12,7 @@ $(NAME):	$(OBJ)
 	$(CC) -o $(NAME) $(CFLAGS) $(SRC) $(LDFLAGS)
 
 test:	$(NAME)
-	$(CC) -o $(TEST) $(TEST).c $(NAME).c $(NAME)_validation.c $(LDFLAGS) $(CFLAGS)
+	$(CC) -o $(TEST) $(TEST).c $(NAME).c $(NAME)_validation.c $(NAME)_npi.c $(LDFLAGS) $(CFLAGS)
 	$(TEST)
 
 clean: 
