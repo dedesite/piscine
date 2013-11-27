@@ -34,7 +34,7 @@ int is_operator_prioritary(char* op_1, char* op_2, char* operators)
 
     pos_1 = get_char_pos(operators, *op_1);
     pos_2 = get_char_pos(operators, *op_2);
-    if((pos_1 < 4 || pos_1 > 5) || (pos_2 > 3 && pos_2 < 6))
+    if( pos_1 > 3 && pos_2 < 4)
         return (1);
     return (0);
 }

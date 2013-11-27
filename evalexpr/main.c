@@ -1,5 +1,5 @@
-#include <evalexpr.h>
-#include <my.h>
+#include "evalexpr.h"
+#include "my.h"
 
 int main(int ac, char **av)
 {

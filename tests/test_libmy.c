@@ -1,8 +1,9 @@
 #include <string.h>
 #include <stdlib.h>
-#include <my.h>
-#include <mylist.h>
-#include <test.h>
+
+#include "my.h"
+#include "mylist.h"
+#include "test.h"
 
 void test_my_put_nbr()
 {
