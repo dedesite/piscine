@@ -33,7 +33,25 @@ int count_expr_tokens(char* expr, char* base, char* operators)
     return (nb_tokens);
 }
 
+void add_operator(char** tab, int* token_ind, char op, char* operators)
+{
+    int ind;
+    (void)(operators);
 
+    ind = *token_ind;
+    /*if(ind != 0 && is_operator(tab[ind - 1], operators))
+    {
+        if(operators[OP_PLUS_IDX] != op &&
+            operators[OP_SUB_IDX] != op)
+            return (0);
+        if(operators[OP_PLUS_IDX] == tab[ind - 1][0] ||
+            operators[OP_SUB_IDX] == tab[ind - 1][0])
+    }*/
+    tab[ind] = malloc(2);
+    tab[ind][0] = op;
+    tab[ind][1] = '\0';
+    (*token_ind)++;    
+}
 
 char** expr_to_tab(char* expr, char* base, char* operators)
 {
@@ -61,12 +79,7 @@ char** expr_to_tab(char* expr, char* base, char* operators)
             token_ind++;
         }
         if(my_strchr(operators, expr[i]) != 0)
-        {
-            tab[token_ind] = malloc(2);
-            tab[token_ind][0] = expr[i];
-            tab[token_ind][1] = '\0';
-            token_ind++;
-        }
+            add_operator(tab, &token_ind, expr[i], operators);
         i++;
     }
     tab[token_ind] = 0;

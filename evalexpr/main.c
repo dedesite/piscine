@@ -1,19 +1,10 @@
 #include "evalexpr.h"
 #include "my.h"
 
-int check_base(char* b)
-{
-
-}
-
-int check_ops(char* ops)
-{
-
-}
-
 char* get_expr(unsigned int size)
 {
-
+    (void)(size);
+    return (0);
 }
 
 int main(int ac, char **av)

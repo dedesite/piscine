@@ -14,12 +14,19 @@ t_list* npi_manage_operator(char** expr_tab, char* token, int* ind,
     t_list* stack, char* operators) 
 {
     char* list_token;
+    char op;
+    char* temp;
 
+    if(stack != 0)
+    {
+        temp = stack->data;
+        op = *temp;        
+    }
     if(my_list_size(stack) == 0)
         stack = my_list_add(token, stack);
-    else if(is_parenthesis(stack->data, operators, 1))
+    else if(is_parenthesis(op, operators, 1))
         stack = my_list_add(token, stack);
-    else if(is_operator_prioritary(token, stack->data, operators))
+    else if(is_operator_prioritary(*token, op, operators))
         stack = my_list_add(token, stack);
     else
     {
@@ -50,16 +57,16 @@ char** expr_to_npi(char** expr_tab, char* base, char* operators)
         current_token = expr_tab[i];
         if(is_operand(current_token, base))
             npi_manage_operand(expr_tab, current_token, &out_ind);
-        else if(is_parenthesis(current_token, operators, 1))
+        else if(is_parenthesis(*current_token, operators, 1))
             stack = my_list_add(current_token, stack);
-        else if(is_operator(current_token, operators))
+        else if(is_operator(*current_token, operators))
             stack = npi_manage_operator(expr_tab, current_token, &out_ind, 
                 stack, operators);
         else
         {
             free(expr_tab[i]);
             token = my_list_pop(&stack);
-            while(!is_parenthesis(token, operators, 1))
+            while(!is_parenthesis(*token, operators, 1))
             {
                 expr_tab[out_ind] = token;
                 token = my_list_pop(&stack);
