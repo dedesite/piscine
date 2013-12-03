@@ -18,14 +18,23 @@ int is_expr_valid(char* expr, char* base, char* operators)
             prec = expr[i];
         else if(my_strchr(operators, expr[i]) != 0)
         {
-            
+            if(is_parenthesis(expr[i], operators, 0))
+                nb_close_parentethis++;
+            else if(is_parenthesis(expr[i], operators, 1))
+                nb_open_parentethis++;
+            else if(i != 0 && is_operator(prec, operators))
+            {
+                if(my_strchr(&operators[4], prec) || 
+                    my_strchr(&operators[4], expr[i]))
+                    return (0);
+            }
             prec = expr[i];
         }
         else if (expr[i] != ' ')
             return (0);
         i++;
     }
-    return (1);
+    return (nb_open_parentethis == nb_close_parentethis);
 }
 
 int is_operator(char token, char* operators)
