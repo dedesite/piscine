@@ -48,11 +48,20 @@ $(function(){
 	});
 
 	$("#board").mouseup(function(e){
+		stopDrawing();
+	});
+
+	$("body").mouseup(function(e){
+		stopDrawing();
+	});
+
+	function stopDrawing()
+	{
 		if(option === "pencil"){
 			drawing = false;
 			ctx.closePath();
-		}
-	});
+		}		
+	}
 
 	function getMousePos(e){
 		return {x:e.pageX - canvas.offsetLeft, y:e.pageY - canvas.offsetTop};
@@ -61,11 +70,13 @@ $(function(){
 	function drawShape(shape)
 	{
 		if(shape === "rectangle"){
-			ctx.strokeRect(drawPos[0].x, drawPos[0].y, drawPos[1].x - drawPos[0].x, drawPos[1].y - drawPos[0].y);
+			ctx.strokeRect(drawPos[0].x, drawPos[0].y, 
+				drawPos[1].x - drawPos[0].x, drawPos[1].y - drawPos[0].y);
 		}
 		else if(shape === "circle"){
 			ctx.beginPath();
-			ctx.arc(drawPos[0].x, drawPos[0].y, drawPos[1].x - drawPos[0].x,0, Math.PI*2,true);
+			var radius = Math.abs(drawPos[1].x - drawPos[0].x);
+			ctx.arc(drawPos[0].x, drawPos[0].y, radius,0, Math.PI*2,true);
 			ctx.stroke();
 			ctx.closePath();
 		}
