@@ -77,16 +77,19 @@ int main(int argc, char** argv, char** env)
 
     env_path = find_path(env);
     my_putstr("$>");
-    while((len = read(0, buffer, 4096)) > 0)
+    while((len = read(STDIN_FILENO, buffer, 4096)) > 0)
     {
-        cmd = my_str_to_wordtab(buffer);
-        permission = my_exec(env_path, cmd, env);
-        if (permission == 0)
-            my_putstr("Permission denied.\n");
-        else if (permission == -1)
-            my_putstr("Command not found.\n");
-        else
-            waitpid(permission, &status, 0);
+        cmd = my_str_to_wordtab(&buffer[1]);
+        if(cmd[0] != 0)
+        {
+            permission = my_exec(env_path, cmd, env);
+            if (permission == 0)
+                my_putstr("Permission denied.\n");
+            else if (permission == -1)
+                my_putstr(my_strcat(buffer, " : command not found.\n"));
+            else
+                waitpid(permission, &status, 0);
+        }
         my_putstr("$>");
     }
     return (0);
