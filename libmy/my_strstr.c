@@ -38,9 +38,11 @@ char *my_strstr(char *str, char *to_find)
 */
 char *my_strchr(char *str, char to_find)
 {
-	char s[2];
-
-	s[0] = to_find;
-	s[1] = '\0';
-	return my_strstr(str, s);
+	while(*str)
+	{
+		if(*str == to_find)
+			return(str);
+		++str;
+	}
+	return (0);
 }

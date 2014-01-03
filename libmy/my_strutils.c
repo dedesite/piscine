@@ -1,3 +1,5 @@
+#include "my.h"
+
 int is_lower(char c)
 {
 	return (c >= 'a' && c <= 'z');
@@ -20,7 +22,7 @@ int is_alpha(char c)
 
 int is_alphanum(char c)
 {
-	return (is_alpha(c) || is_num(c));
+	return (is_alpha(c) || is_num(c) || c == '-');
 }
 
 int is_printable(char c)
@@ -38,6 +40,18 @@ int is_word_end(char* str, int i)
 	return (!is_alphanum(str[i]) && (i != 0 && is_alphanum(str[i - 1])));
 }
 
+int is_word_start_token(char* str, int i, char* tokens)
+{
+	return (my_strchr(tokens, str[i]) == 0 && 
+		(i == 0 || my_strchr(tokens, str[i - 1]) != 0));
+}
+
+int is_word_end_token(char* str, int i, char* tokens)
+{
+	return (my_strchr(tokens, str[i]) != 0 && 
+		(i != 0 || my_strchr(tokens, str[i - 1]) == 0));
+}
+
 int count_str_words(char* str)
 {
 	int i;
@@ -48,6 +62,22 @@ int count_str_words(char* str)
 	while (str[i])
 	{
 		if(is_word_start(str, i))
+			nb_words = nb_words + 1;
+		i = i + 1;
+	}
+	return nb_words;
+}
+
+int count_str_words_token(char* str, char* tokens)
+{
+	int i;
+	int nb_words;
+
+	i = 0;
+	nb_words = 0;
+	while (str[i])
+	{
+		if(is_word_start_token(str, i, tokens))
 			nb_words = nb_words + 1;
 		i = i + 1;
 	}

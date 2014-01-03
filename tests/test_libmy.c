@@ -170,6 +170,12 @@ void test_strstr()
 	test(my_strcmp(my_strstr("les bananes c'est bon", "bo"), "bon") == 0);
 }
 
+void test_strchr()
+{
+	test(my_strcmp(my_strchr("coucou les lapinous", 'l'), "les lapinous") == 0);
+	test(my_strchr("coucou les lapinous", 'z') == 0);
+}
+
 void test_my_strcmp()
 {
 	char str[3] = "ab";
@@ -433,11 +439,12 @@ void test_split_str()
 
 void test_str_to_wordtab()
 {
-	test(count_str_words("coucou les lapinous") == 3);
+	char** tab;
+	/*test(count_str_words("coucou les lapinous") == 3);
 	test(count_str_words("   coucou les    lapinous  ") == 3);
 	test(count_str_words("coucou|les/lapinous  ") == 3);
 	char* str = my_strdup("coucou les lapinous");
-	char** tab = my_str_to_wordtab(str);
+	tab = my_str_to_wordtab(str);
 	test_tab(str, tab);
 	str = my_strdup("   coucou les    lapinous  ");
 	tab = my_str_to_wordtab(str);
@@ -445,6 +452,14 @@ void test_str_to_wordtab()
 	str = my_strdup("coucou|les/lapinous  ");
 	tab = my_str_to_wordtab(str);
 	test_tab(str, tab);
+	tab = my_str_to_wordtab("");
+	test(tab[0] == 0);
+	free(tab);*/
+	//test(count_str_words("ls -R", " ") == 2);
+	tab = str_to_wordtab("ls -R", " ");
+	test_str(tab[0], "ls");
+	test_str(tab[1], "-R");
+	free(tab);
 }
 
 void test_big_endian()
@@ -568,6 +583,6 @@ void test_get_char_pos()
 
 int main()
 {
-	test_my_list_pop();
+	test_str_to_wordtab();
 	return (0);
 }
