@@ -22,7 +22,7 @@ char* build_path(char* dirname, char* file)
     return (path);
 }
 
-void my_exec(char** env_path, char** cmd, char** env)
+int my_exec(char** env_path, char** cmd, char** env)
 {
     int i;
     char* filename;
@@ -36,23 +36,19 @@ void my_exec(char** env_path, char** cmd, char** env)
     {
         if(access(filename, X_OK) == 0)
         {
-            permission = 1;
             pid = fork();
             if(pid == 0)
-                execve(filename, &cmd[1], env);
+                execve(filename, cmd, env);
+            else
+                return (1);
         }
         else if(errno == EACCES)
-        {
             permission = 0;
-        }
         free(filename);
         filename = build_path(env_path[i], cmd[0]);
         ++i;
     }
-    if (permission == 0)
-        my_putstr("Permission denied.\n");
-    else if (permission == -1)
-        my_putstr("Command not found.\n");
+    return (permission);
 }
 
 char* find_path(char** env)
@@ -65,7 +61,7 @@ char* find_path(char** env)
     while(env[i])
     {
         path = my_strstr(env[i], "PATH=");
-        if(path != NULL && my_strcmp(&path[5], &env[i][5]) == 0)
+        if(path != NULL && path == env[i])
             return (&path[5]);
         ++i;
     }
@@ -79,6 +75,7 @@ int main(int argc, char** argv, char** env)
     char* path;
     char** splited_path;
     char** cmd;
+    int permission;
 
     path = find_path(env);
     splited_path = 0;
@@ -88,7 +85,11 @@ int main(int argc, char** argv, char** env)
     while((len = read(0, buffer, 4096)) > 0)
     {
         cmd = my_str_to_wordtab(buffer);
-        my_exec(splited_path, cmd, env);
+        permission = my_exec(splited_path, cmd, env);
+        if (permission == 0)
+            my_putstr("Permission denied.\n");
+        else if (permission == -1)
+            my_putstr("Command not found.\n");
         my_putstr("$>");
     }
     return (0);
