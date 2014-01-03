@@ -55,18 +55,15 @@ int my_exec(char** env_path, char** cmd, char** env)
 char* find_path(char** env)
 {
     int i;
-    char* path;
 
-    path = 0;
     i = 0;
     while(env[i])
     {
-        path = my_strstr(env[i], "PATH=");
-        if(path != NULL && path == env[i])
-            return (&path[5]);
+        if(my_strncmp(env[i], "PATH=", 5) == 0)
+            return (&env[i][5]);
         ++i;
     }
-    return (path);
+    return (0);
 }
 
 int main(int argc, char** argv, char** env)
