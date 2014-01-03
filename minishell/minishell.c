@@ -11,6 +11,7 @@ char* build_path(char* dirname, char* file)
 {
     char* path;
 
+    path = NULL;
     if(dirname)
     {
         path = malloc(my_strlen(dirname) + my_strlen(file) + 2);
@@ -18,8 +19,6 @@ char* build_path(char* dirname, char* file)
         path = my_strcat(path, "/");
         path = my_strcat(path, file);
     }
-    else
-        path = NULL;
     return (path);
 }
 
