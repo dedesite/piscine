@@ -62,7 +62,7 @@ char** find_path(char** env)
             return (split_str(&env[i][5], ':'));
         ++i;
     }
-    return (0);
+    return (split_str("", ':'));
 }
 
 int main(int argc, char** argv, char** env)
