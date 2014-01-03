@@ -1,4 +1,5 @@
 #include <sys/types.h>
+#include <sys/wait.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -40,7 +41,7 @@ int my_exec(char** env_path, char** cmd, char** env)
             if(pid == 0)
                 execve(filename, cmd, env);
             else
-                return (1);
+                return (pid);
         }
         else if(errno == EACCES)
             permission = 0;
@@ -76,6 +77,7 @@ int main(int argc, char** argv, char** env)
     char** splited_path;
     char** cmd;
     int permission;
+    int status;
 
     path = find_path(env);
     splited_path = 0;
@@ -90,6 +92,8 @@ int main(int argc, char** argv, char** env)
             my_putstr("Permission denied.\n");
         else if (permission == -1)
             my_putstr("Command not found.\n");
+        else
+            waitpid(permission, &status, 0);
         my_putstr("$>");
     }
     return (0);
