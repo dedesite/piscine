@@ -52,7 +52,7 @@ int my_exec(char** env_path, char** cmd, char** env)
     return (permission);
 }
 
-char* find_path(char** env)
+char** find_path(char** env)
 {
     int i;
 
@@ -60,7 +60,7 @@ char* find_path(char** env)
     while(env[i])
     {
         if(my_strncmp(env[i], "PATH=", 5) == 0)
-            return (&env[i][5]);
+            return (split_str(&env[i][5], ':'));
         ++i;
     }
     return (0);
@@ -70,21 +70,17 @@ int main(int argc, char** argv, char** env)
 {
     char buffer[4096];
     int len;
-    char* path;
-    char** splited_path;
+    char** env_path;
     char** cmd;
     int permission;
     int status;
 
-    path = find_path(env);
-    splited_path = 0;
-    if(path)
-        splited_path = split_str(path, ':');
+    env_path = find_path(env);
     my_putstr("$>");
     while((len = read(0, buffer, 4096)) > 0)
     {
         cmd = my_str_to_wordtab(buffer);
-        permission = my_exec(splited_path, cmd, env);
+        permission = my_exec(env_path, cmd, env);
         if (permission == 0)
             my_putstr("Permission denied.\n");
         else if (permission == -1)
