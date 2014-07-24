@@ -1,7 +1,4 @@
-var DOM_VK_LEFT = 37;
-var DOM_VK_UP = 38;
-var DOM_VK_RIGHT = 39;
-var DOM_VK_DOWN = 40;
+var DIRECTIONS = {37:"left", 38:"up", 39:"right",40:"down"};
 
 var grid;
 
@@ -33,32 +30,32 @@ and merge identical numbers by adding them
 */
 function merge_tab(tab, left){
 	function move_tab(a, b){
-		return left === true ? a === 0 : b === 0;
+		return a === 0;
 	}
 	tab.sort(move_tab);
-	//Check pairs
-	for(var i = 0 ; i < 3 ; i++){
+	if(left === false){
+		tab.reverse();
+	}
+	//merge pairs
+	for(var i = 0 ; i < tab.length - 1 ; i++){
 		if(tab[i] === tab[i+1]){
-			if(left === true){
-				tab[i] = tab[i] + tab[i + 1];
-				tab[i + 1] = 0;
-			}
-			else{
-				tab[i + 1] = tab[i] + tab[i + 1];
-				tab[i] = 0;
-			}
+			tab[i] = tab[i] + tab[i + 1];
+			tab[i + 1] = 0;
 			i++;
 		}
 	}
 	//Then move everything
 	tab.sort(move_tab);
+	if(left === false){
+		tab.reverse();
+	}
 }
 
 function inverse_grid(grid_to_inv){
 	var g = [];
-	for(var i = 0; i < 4; i++){
+	for(var i = 0; i < grid.length; i++){
 		g[i] = [];
-		for(var j = 0; j < 4; j++){
+		for(var j = 0; j < grid[i].length; j++){
 			g[i][j] = grid_to_inv[j][i];
 		}
 	}
@@ -66,7 +63,7 @@ function inverse_grid(grid_to_inv){
 }
 /**
 Move the entire grid
-@attr direction : left, rigth, up, down
+@attr direction : left, right, up, down
 */
 function move_grid(direction){
 	if(direction === "up" || direction === "down"){
@@ -85,51 +82,41 @@ function move_grid(direction){
 
 /**Simply display all the numbers in row of 4*/
 function display_grid(){
-	var grid_html = "";
-	for(var i = 0; i < 4; i++){
-		grid_html += grid[i].toString().replace(/0/g, "_").replace(/,/g, " ");
-		grid_html += "<br>";
+	var grid_html = '<div class="grid">';
+	for(var i = 0; i < grid.length; i++){
+		for(var j = 0; j < grid[i].length; j++){
+			if(grid[i][j] === 0){
+				grid_html += '<div class="cell"></div>';	
+			}
+			else{
+				grid_html += '<div class="cell">' + grid[i][j]+ '</div>';		
+			}
+		}
 	}
+	grid_html += '</div>';
 	document.getElementById("grid").innerHTML = grid_html;
 }
 
 function is_grid_full(){
 	grid_full = true;
-	for(var i = 0 ; i < 4 ; i++){
-		for(var j = 0; j < 4; j++){
-			if(grid[i][j] == 0){
-				grid_full = false;
-				break;
-			}
+	for(var i = 0 ; i < grid.length ; i++){
+		if(grid[i].indexOf(0) !== -1){
+			grid_full = false;
+			break;
 		}
 	}
 	return grid_full;
 }
 
 window.addEventListener("keydown", function (event) {
+	var dir = DIRECTIONS[event.keyCode];
 	if(is_grid_full()){
 		document.getElementById("grid").innerHTML = "Game over";
 		start();
 	}
-	var has_moved = true;
-	switch(event.keyCode){
-		case DOM_VK_UP:
-			move_grid("up");
-			break;
-		case DOM_VK_DOWN:
-			move_grid("down");
-			break;
-		case DOM_VK_LEFT:
-			move_grid("left");
-			break;
-		case DOM_VK_RIGHT:
-			move_grid("right");
-			break;
-		default:
-			has_moved = false;
-			break;
-	}
-	if(has_moved){
+
+	if(dir != null){
+		move_grid(dir);
 		spawn_number();
 		display_grid();
 	}

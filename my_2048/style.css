@@ -1,0 +1,23 @@
+* {
+	box-sizing: border-box;
+}
+
+h1 {
+	text-align: center;
+}
+
+.grid {
+	margin: 0 auto;
+	width: 400px;
+}
+
+.cell {
+	line-height: 100px;
+	font-size: 20px;
+	font-weight: bold;
+	height: 100px;
+	width: 100px;
+	float: left;
+	border: solid 1px #FF0000;
+	text-align: center;
+}
