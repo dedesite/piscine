@@ -85,12 +85,8 @@ function display_grid(){
 	var grid_html = '<div class="grid">';
 	for(var i = 0; i < grid.length; i++){
 		for(var j = 0; j < grid[i].length; j++){
-			if(grid[i][j] === 0){
-				grid_html += '<div class="cell"></div>';	
-			}
-			else{
-				grid_html += '<div class="cell">' + grid[i][j]+ '</div>';		
-			}
+			var val = grid[i][j] !== 0 ? grid[i][j] : "";
+			grid_html += '<div class="cell tile-' + val + '">' + val + '</div>';
 		}
 	}
 	grid_html += '</div>';
@@ -98,14 +94,12 @@ function display_grid(){
 }
 
 function is_grid_full(){
-	grid_full = true;
 	for(var i = 0 ; i < grid.length ; i++){
 		if(grid[i].indexOf(0) !== -1){
-			grid_full = false;
-			break;
+			return false;
 		}
 	}
-	return grid_full;
+	return true;
 }
 
 window.addEventListener("keydown", function (event) {
