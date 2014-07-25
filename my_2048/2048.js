@@ -1,6 +1,7 @@
 var DIRECTIONS = {37:"left", 38:"up", 39:"right",40:"down"};
 
 var grid;
+var score = 0;
 
 /**Return a random int between 0 and 3*/
 function get_random_pos(){
@@ -24,11 +25,14 @@ function start(){
 	spawn_number();
 }
 
+function arrays_equal(a,b) { return !(a<b || b<a); }
 /**
 Move elements of a 4 length int tab to the right or the left 
 and merge identical numbers by adding them 
+@return true if any element was moved
 */
 function merge_tab(tab, left){
+	var temp = tab.slice();
 	function move_tab(a, b){
 		return a === 0;
 	}
@@ -40,6 +44,7 @@ function merge_tab(tab, left){
 	for(var i = 0 ; i < tab.length - 1 ; i++){
 		if(tab[i] === tab[i+1]){
 			tab[i] = tab[i] + tab[i + 1];
+			score += tab[i];
 			tab[i + 1] = 0;
 			i++;
 		}
@@ -49,6 +54,7 @@ function merge_tab(tab, left){
 	if(left === false){
 		tab.reverse();
 	}
+	return !arrays_equal(tab, temp);
 }
 
 function inverse_grid(grid_to_inv){
@@ -71,18 +77,23 @@ function move_grid(direction){
 	}
 
 	var left = direction === "left" || direction === "up";
+	var moved = false;
 	for(i = 0; i < 4; i++){
-		merge_tab(grid[i], left);
+		if(merge_tab(grid[i], left)){
+			moved = true;
+		}
 	}
 
 	if(direction === "up" || direction === "down"){
 		grid = inverse_grid(grid);
 	}
+	return moved;
 }
 
 /**Simply display all the numbers in row of 4*/
 function display_grid(){
-	var grid_html = '<div class="grid">';
+
+	var grid_html = 'Score : ' + score + '<br><div class="grid">';
 	for(var i = 0; i < grid.length; i++){
 		for(var j = 0; j < grid[i].length; j++){
 			var val = grid[i][j] !== 0 ? grid[i][j] : "";
@@ -110,9 +121,10 @@ window.addEventListener("keydown", function (event) {
 	}
 
 	if(dir != null){
-		move_grid(dir);
-		spawn_number();
-		display_grid();
+		if(move_grid(dir)){
+			spawn_number();
+			display_grid();
+		}
 	}
 });
 
