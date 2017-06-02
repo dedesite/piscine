@@ -58,27 +58,6 @@ function mergeEvenLeft(row) {
 	}).sort(a => a === 0);
 }
 
-function mergeEvenLeftReduce(row) {
-	const mergedRow = row.reduce((acc, num) => {
-		if (num !== 0) {
-			const previousNum = acc.pop();
-			if (previousNum) {
-				if (!previousNum.merged && previousNum.val === num) {
-					acc.push({merged: true, val: num + previousNum.val});
-				} else {
-					acc.push(previousNum);
-					acc.push({merged: false, val: num});
-				}
-			} else {
-				acc.push({merged: false, val: num});
-			}
-		}
-		return acc;
-	}, []).map(num => num.val);
-	// Fill the rest with 0
-	return mergedRow.concat(Array(row.length - mergedRow.length).fill(0));
-}
-
 /**
  * Merge all rows to the left
  */
