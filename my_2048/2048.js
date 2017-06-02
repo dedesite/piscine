@@ -1,132 +1,161 @@
-var DIRECTIONS = {37:"left", 38:"up", 39:"right",40:"down"};
+let score = 0;
 
-var grid;
-var score = 0;
-
-/**Return a random int between 0 and 3*/
-function get_random_pos(){
-	return Math.floor(Math.random() * 4);
+function getRandomPos() {
+	return [0, 0].map(() => Math.floor(Math.random() * 4));
 }
 
-/**Spawn a 2 (90%) or a 4 in a random position where there is still place*/
-function spawn_number(){
-	var line = get_random_pos();
-	var col = get_random_pos();
-	while(grid[line][col] != 0){
-		line = get_random_pos();
-		col = get_random_pos();
-	}
-	grid[line][col] = Math.random() < 0.9 ? 2 : 4;
-}
-
-function start(){
-	grid = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
-	spawn_number();
-	spawn_number();
-}
-
-function arrays_equal(a,b) { return !(a<b || b<a); }
 /**
-Move elements of a 4 length int tab to the right or the left 
-and merge identical numbers by adding them 
-@return true if any element was moved
-*/
-function merge_tab(tab, left){
-	var temp = tab.slice();
-	function move_tab(a, b){
-		return a === 0;
-	}
-	tab.sort(move_tab);
-	if(left === false){
-		tab.reverse();
-	}
-	//merge pairs
-	for(var i = 0 ; i < tab.length - 1 ; i++){
-		if(tab[i] === tab[i+1]){
-			tab[i] = tab[i] + tab[i + 1];
-			score += tab[i];
-			tab[i + 1] = 0;
-			i++;
-		}
-	}
-	//Then move everything
-	tab.sort(move_tab);
-	if(left === false){
-		tab.reverse();
-	}
-	return !arrays_equal(tab, temp);
+ * Spawn a 2 (in 90% of the case) or a 4 in a random position where there is still place
+ */
+function spawnNumber(grid) {
+	let x, y;
+	do {
+		[x, y] = getRandomPos();
+	} while (grid[x][y] != 0)
+	grid[x][y] = Math.random() < 0.9 ? 2 : 4;
+	return grid;
 }
 
-function inverse_grid(grid_to_inv){
-	var g = [];
-	for(var i = 0; i < grid.length; i++){
-		g[i] = [];
-		for(var j = 0; j < grid[i].length; j++){
-			g[i][j] = grid_to_inv[j][i];
-		}
-	}
-	return g;
-}
 /**
-Move the entire grid
-@attr direction : left, right, up, down
-*/
-function move_grid(direction){
-	if(direction === "up" || direction === "down"){
-		grid = inverse_grid(grid);
-	}
-
-	var left = direction === "left" || direction === "up";
-	var moved = false;
-	for(i = 0; i < 4; i++){
-		if(merge_tab(grid[i], left)){
-			moved = true;
-		}
-	}
-
-	if(direction === "up" || direction === "down"){
-		grid = inverse_grid(grid);
-	}
-	return moved;
+ * Fill the grid with 0 (no numbers), reset the score and spawn two numbers
+ */
+function start() {
+	let grid = [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+	score = 0;
+	grid = spawnNumber(grid);
+	grid = spawnNumber(grid);
+	return grid;
 }
 
-/**Simply display all the numbers in row of 4*/
-function display_grid(){
+/**
+ * IMHO best way to transpose a Matrix https://stackoverflow.com/a/36164530
+ */
+function transposeGrid(grid) {
+	return grid[0].map((x, i) => grid.map(y => y[i]))
+}
 
-	var grid_html = 'Score : ' + score + '<br><div class="grid">';
-	for(var i = 0; i < grid.length; i++){
-		for(var j = 0; j < grid[i].length; j++){
-			var val = grid[i][j] !== 0 ? grid[i][j] : "";
-			grid_html += '<div class="cell tile-' + val + '">' + val + '</div>';
+function reverseGrid(grid) {
+	return grid.map(row => row.reverse())
+}
+
+/**
+ * Merge a row to the left and update score if merged
+ * Examples :
+ * [2, 0, 0, 2] => [4, 0, 0, 0]
+ * [2, 2, 0, 4] => [4, 4, 0, 0]
+ * [0, 0, 0, 4] => [4, 0, 0, 0]
+ * [0, 0, 2, 4] => [2, 4, 0, 0]
+ */
+function mergeEvenLeft(row) {
+	return row.map((num, index, row) => {
+		const nextSameNumInd = row.findIndex((val, ind) => ind > index && val === num);
+		if (nextSameNumInd !== -1) {
+				row[nextSameNumInd] = 0;
+				score += num * 2;
+				return num * 2;
 		}
-	}
+		return num;
+	}).sort(a => a === 0);
+}
+
+function mergeEvenLeftReduce(row) {
+	const mergedRow = row.reduce((acc, num) => {
+		if (num !== 0) {
+			const previousNum = acc.pop();
+			if (previousNum) {
+				if (!previousNum.merged && previousNum.val === num) {
+					acc.push({merged: true, val: num + previousNum.val});
+				} else {
+					acc.push(previousNum);
+					acc.push({merged: false, val: num});
+				}
+			} else {
+				acc.push({merged: false, val: num});
+			}
+		}
+		return acc;
+	}, []).map(num => num.val);
+	// Fill the rest with 0
+	return mergedRow.concat(Array(row.length - mergedRow.length).fill(0));
+}
+
+/**
+ * Merge all rows to the left
+ */
+function moveLeft(grid) {
+	return grid.map(mergeEvenLeft);
+}
+
+/**
+ * Move the entire grid in a specific direction and merge number that are equals and side by side
+ * @direction : left, right, up, down
+*/
+function moveGrid(grid, direction) {
+	// In order to work with only rows, we transpose the grid on up and down moves.
+	const transpose = ['up', 'down'].includes(direction);
+	// Since the merge algo is only left oriented, we reverse the grid on right and down moves
+	const reverse = ['right', 'down'].includes(direction);
+
+	if (transpose) grid = transposeGrid(grid);
+	if (reverse) grid = reverseGrid(grid);
+
+	grid = moveLeft(grid);
+
+	if (reverse) grid = reverseGrid(grid);
+	if (transpose) grid = transposeGrid(grid);
+
+	return grid;
+}
+
+/**
+ * Simply display all the numbers in row of 4
+ * And the current score
+ */
+function displayGrid(grid, score) {
+	let grid_html = `<div class="score">Score : ${score}</div><div class="grid">`;
+
+	grid.forEach(row => {
+		row.forEach(num => {
+			grid_html += `<div class="cell tile-${num}">${num || ''}</div>`;
+		});
+	});
 	grid_html += '</div>';
 	document.getElementById("grid").innerHTML = grid_html;
 }
 
-function is_grid_full(){
-	for(var i = 0 ; i < grid.length ; i++){
-		if(grid[i].indexOf(0) !== -1){
-			return false;
-		}
-	}
-	return true;
+/**
+ * @return true if there is no space left in the grid
+ */
+function isGridFull(grid) {
+	return !grid.some(row => row.includes(0));
 }
 
-window.addEventListener("keydown", function (event) {
-	var dir = DIRECTIONS[event.keyCode];
-	if(is_grid_full()){
-		document.getElementById("grid").innerHTML = "Game over";
-		start();
-	}
+window.onload = function () {
+	let grid;
 
-	if(dir != null){
-		if(move_grid(dir)){
-			spawn_number();
-			display_grid();
+	window.onkeydown = function (event) {
+		const DIRECTIONS = {37:"left", 38:"up", 39:"right",40:"down"};
+		const dir = DIRECTIONS[event.keyCode];
+
+		if(isGridFull(grid)){
+			document.getElementById("grid").innerHTML = "Game over";
+			grid = start();
+			score = 0;
 		}
-	}
-});
 
-start();
-display_grid();
+		if(dir != null){
+			// Try to move the grid
+			const gridBefore = JSON.stringify(grid);
+			grid = moveGrid(grid, dir)
+			if(JSON.stringify(grid) !== gridBefore){
+				// If it has moved, then spawn a new number
+				grid = spawnNumber(grid);
+				// And refresh the grid
+				displayGrid(grid, score);
+			}
+		}
+	};
+
+	grid = start();
+	displayGrid(grid);
+}
