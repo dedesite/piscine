@@ -45,12 +45,14 @@ function reverseGrid(grid) {
  * [2, 2, 0, 4] => [4, 4, 0, 0]
  * [0, 0, 0, 4] => [4, 0, 0, 0]
  * [0, 0, 2, 4] => [2, 4, 0, 0]
+ * [2, 4, 2, 4] => [2, 4, 2, 4]
  */
-function mergeEvenLeft(row) {
+function mergeEvenLeft2(row) {
 	return row.map((num, index, row) => {
-		const nextSameNumInd = row.findIndex((val, ind) => ind > index && val === num);
-		if (nextSameNumInd !== -1) {
-				row[nextSameNumInd] = 0;
+		const nextNumInd = row.findIndex((val, ind) => ind > index && val !== 0);
+
+		if (nextNumInd !== -1 && row[nextNumInd] === num) {
+				row[nextNumInd] = 0;
 				score += num * 2;
 				return num * 2;
 		}
@@ -58,11 +60,40 @@ function mergeEvenLeft(row) {
 	}).sort(a => a === 0);
 }
 
+/*
+ * Alternativ version
+ */
+function mergeEvenLeft(row) {
+	const removeZeros = arr => arr.filter(cell => cell !== 0);
+
+	const mergedRow = removeZeros(row).reduce((mergedRow, currentCell, currentIndex, rowWithoutZeros) => {
+		const prevCell = currentIndex > 0 && rowWithoutZeros[currentIndex - 1];
+		const prevMergedCell = currentIndex > 0 && mergedRow[currentIndex - 1]
+		const nextCell = currentIndex < 3 && rowWithoutZeros[currentIndex + 1];
+
+		// If prevCell has been merged
+		if (prevCell && prevMergedCell !== 0 && (prevCell !== prevMergedCell)) {
+			mergedRow.push(0);
+		} else if (currentCell === nextCell) {
+			score += currentCell * 2;
+			mergedRow.push(currentCell * 2);
+		} else {
+			mergedRow.push(currentCell);
+		}
+		return mergedRow;
+	}, []);
+	return removeZeros(mergedRow);
+}
+
+function moveLeft(row) {
+	const mergedRow = mergeEvenLeft(row);
+	return mergedRow.concat(Array(row.length - mergedRow.length).fill(0));
+}
 /**
  * Merge all rows to the left
  */
-function moveLeft(grid) {
-	return grid.map(mergeEvenLeft);
+function moveGridLeft(grid) {
+	return grid.map(moveLeft);
 }
 
 /**
@@ -78,7 +109,7 @@ function moveGrid(grid, direction) {
 	if (transpose) grid = transposeGrid(grid);
 	if (reverse) grid = reverseGrid(grid);
 
-	grid = moveLeft(grid);
+	grid = moveGridLeft(grid);
 
 	if (reverse) grid = reverseGrid(grid);
 	if (transpose) grid = transposeGrid(grid);
@@ -138,3 +169,9 @@ window.onload = function () {
 	grid = start();
 	displayGrid(grid);
 }
+
+// console.log('[2, 0, 0, 2] => [4, 0, 0, 0]', mergeEvenLeft2([2, 0, 0, 2]));
+// console.log('[2, 4, 2, 4] => [2, 4, 2, 4]', mergeEvenLeft2([2, 4, 2, 4]));
+// console.log('[2, 2, 0, 4] => [4, 4, 0, 0]', mergeEvenLeft2([2, 2, 0, 4]));
+// console.log('[0, 0, 0, 4] => [4, 0, 0, 0]', mergeEvenLeft2([0, 0, 0, 4]));
+// console.log('[0, 0, 2, 4] => [2, 4, 0, 0]', mergeEvenLeft2([0, 0, 2, 4]));
